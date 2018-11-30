@@ -1,0 +1,49 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}  % for danish letters
+%\usepackage[T1]{fontenc}
+\usepackage[british]{babel}  % language
+%\usepackage[yyyymmdd]{datetime}
+\usepackage{geometry}  % layout
+\usepackage{titlesec} % for customizing
+
+% Customized chapter titles
+\titleclass{\chapter}{top}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\thechapter\hspace{20pt}
+{\textbar}\hspace{20pt}}{0pt}{\LARGE\bfseries}
+
+% Customized Section titles
+\titleformat*{\section}{\large\bfseries}
+
+\title{Extending Session Types to Model Security Properties}
+\author{Julie Tollund}
+
+\begin{document}
+\pagenumbering{gobble}
+\maketitle
+
+\chapter{Introduction}
+\section{Motivation}
+\section{Current research}
+
+\section{Intended outcome}
+
+Hej
+
+\chapter{Work Done}
+\section{Applied $\pi$-Calculus}
+Short - examples of the applied $\pi$-calculus 
+\section{Security Protocols}
+Message deduction rules and derivation sequence (from book), combined with the previous applied $\pi$-calculus. 
+\section{Session Types (and choreography programming)}
+What it is and how it is used (two articles - careful with $\pi$-calculus)
+\section{TPM}
+The TPM as case, with examples
+\section{Evaluation}
+TPM with session types
+
+\chapter{Future Plan}
+
+Farwell
+
+
+\end{document}
