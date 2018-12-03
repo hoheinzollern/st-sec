@@ -1,0 +1,65 @@
+This is BibTeX, Version 0.99d (TeX Live 2017)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Thesis_Prep.aux
+The style file: biblatex.bst
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=20001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: Thesis_Prep-blx.bib
+Database file #2: Literature.bib
+Database file #3: Online.bib
+Biblatex version: 3.3
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+You've used 10 entries,
+            6256 wiz_defined-function locations,
+            1231 strings with 10777 characters,
+and the built_in function-call counts, 64004 in all, are:
+= -- 4593
+> -- 1419
+< -- 217
++ -- 2005
+- -- 721
+* -- 4783
+:= -- 7409
+add.period$ -- 0
+call.type$ -- 10
+change.case$ -- 62
+chr.to.int$ -- 54
+cite$ -- 18
+duplicate$ -- 6611
+empty$ -- 5598
+format.name$ -- 778
+if$ -- 12600
+int.to.chr$ -- 0
+int.to.str$ -- 20
+missing$ -- 0
+newline$ -- 344
+num.names$ -- 348
+pop$ -- 3298
+preamble$ -- 1
+purify$ -- 151
+quote$ -- 0
+skip$ -- 1560
+stack$ -- 0
+substring$ -- 8260
+swap$ -- 1341
+text.length$ -- 259
+text.prefix$ -- 0
+top$ -- 1
+type$ -- 328
+warning$ -- 0
+while$ -- 880
+width$ -- 0
+write$ -- 335

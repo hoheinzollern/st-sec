@@ -5,6 +5,17 @@
 %\usepackage[yyyymmdd]{datetime}
 \usepackage{geometry}  % layout
 \usepackage{titlesec} % for customizing
+\usepackage{tocloft} % spacing for table of content
+\usepackage{graphicx} % for added graphics
+\usepackage{pdfpages}
+
+% for tables
+\usepackage{array} 
+\usepackage{amssymb}
+\usepackage{upgreek}
+\usepackage{tipa}
+
+%\usepackage[acronyms,toc]{glossaries}  % References, toc for shown in table of content
 
 % Customized chapter titles
 \titleclass{\chapter}{top}
@@ -13,37 +24,46 @@
 
 % Customized Section titles
 \titleformat*{\section}{\large\bfseries}
+\titleformat*{\subsection}{\normalsize\bfseries}
+
+% bibliography
+\usepackage[backend=bibtex,style=ieee]{biblatex}
+\bibliography{Literature} 
+\bibliography{Online} 
 
 \title{Extending Session Types to Model Security Properties}
 \author{Julie Tollund}
 
 \begin{document}
 \pagenumbering{gobble}
+%\includepdf{frontpage}   // include ITU front page
+\pagenumbering{roman}
 \maketitle
 
+\setlength{\cftbeforesecskip}{10pt}  % set spacing
+\tableofcontents
+% TODO: Glossary and Acronyms?
+\clearpage
+
+\pagenumbering{arabic}
 \chapter{Introduction}
-\section{Motivation}
-\section{Current research}
-
-\section{Intended outcome}
-
-Hej
+\input{Introduction}
 
 \chapter{Work Done}
-\section{Applied $\pi$-Calculus}
-Short - examples of the applied $\pi$-calculus 
-\section{Security Protocols}
-Message deduction rules and derivation sequence (from book), combined with the previous applied $\pi$-calculus. 
-\section{Session Types (and choreography programming)}
-What it is and how it is used (two articles - careful with $\pi$-calculus)
-\section{TPM}
-The TPM as case, with examples
-\section{Evaluation}
-TPM with session types
+\input{Work_done}
 
 \chapter{Future Plan}
+\input{Future}
 
-Farwell
+\clearpage
+\pagenumbering{roman}
+\appendix
 
+\nocite{*}  % for no references but still print
+\printbibliography[title={References},nottype=misc]
+\printbibliography[title={Online references},type=misc]
+% \citeauthor{name}
+% \autocite{name}
+% \textquote{\textit{quote}}\autocite
 
 \end{document}

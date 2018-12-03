@@ -1,0 +1,14 @@
+\section{TPM}
+\begin{itemize}
+  \item Description of the TPM - what it is, and what it's used for
+  \item Examples of TPM commands
+\end{itemize}
+
+The Trusted Platform Module (TPM) is a specialised chip that stores RSA encryption keys specific for the host system for hardware authentication. It is used as a component on an endpoint device and is used for the Windows BitLocker.
+The TPM contains an RSA key pair called the Endorsement Key (EK), together with an owner-specified password. The Storage Root Key (SRK) is created when a user or administrator takes ownership of the system (rephrase), and works in a tree like structure to store TPM generated RSA keys used. \\ \\
+The TPM offers two authorisation sessions:
+\begin{itemize}
+  \item Object Independent Authorisation Protocol (OIAP)
+  \item Object Specific Authorisation Protocol (OSAP)
+\end{itemize}
+The OIAP creates a session that can manipulate any object, but will only work with certain commands. The OSAP creates a session that can only manipulate a specific object, specified at the session start.
