@@ -12,20 +12,28 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Work Done}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.1}Applied $\pi $-Calculus}{3}
+\contentsline {section}{\numberline {2.1}Security Protocols}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.1}Terms}{3}
+\contentsline {subsection}{\numberline {2.1.1}Needham-Schroeder Protocol}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.2}Examples}{4}
+\contentsline {subsection}{\numberline {2.1.2}Message deduction}{4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Security Protocols}{4}
+\contentsline {section}{\numberline {2.2}Applied $\pi $-Calculus}{4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Examples}{5}
+\contentsline {subsection}{\numberline {2.2.1}Process and Terms}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.2.2}Re-visiting the Needham-Schroeder Protocol}{5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Session Types (and choreography programming)}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}TPM}{5}
+\contentsline {subsection}{\numberline {2.3.1}Research within the field}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.4}TPM}{6}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.5}Evaluation}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{7}
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{7}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Future Plan}{8}

@@ -11,9 +11,11 @@ The applied pi-calculus (ref. Abadi and Fournet, 2001) is based upon the languag
 Tools such as ProVerif \autocite{ProVerif}, uses a syntax closely related to the applied pi-calculus, and offers a way of automated reasoning about the security properties found in cryptographic protocols. \\
 %- The properties of these primitives are modelled by equations \\ 
 
+TODO: Grammar for process as well, as it differs from the Pi-calculus
+
 %"The applied pi calculus (...) is a language for describing concurrent processes and their interactions". \\
-\subsection{Terms}
-As mentioned, the applied pi-calculus uses Terms (in contrast to just names in the pi-calculus) to model messages that are exchanged during a protocol. Terms are built over a signature, names and variables\autocite{AplliedPiCalsulus2010}: \\
+\subsection{Process and Terms}
+As mentioned, the applied pi-calculus uses Terms, and such differs from the Pi Calculus, where only names are used, to model messages that are exchanged during a protocol. Terms are built over a signature, names and variables\autocite{AplliedPiCalsulus2010}: (grammar - missing vertical bar)\\
 \begin{center}
 	\begin{tabular} { l l }
  		L, M, N, T, U, V ::= & terms \\ 
@@ -26,14 +28,15 @@ As mentioned, the applied pi-calculus uses Terms (in contrast to just names in t
 \end{center}
 
 
-\subsection{Examples}
-Having established an understanding of how the the applied pi-calculus differentiate from the pi-calculus, we can now look at how some of the known protocols can be described.\\
+\subsection{Re-visiting the Needham-Schroeder Protocol}
+Having established an understanding of how the the applied pi-calculus differentiate from the pi-calculus, we can now use it to get a better understanding of the Needham-Schroeder Protocol previously introduced.\\
+
 First of, we look at the simple Handshake protocol used for setting the parameters for communication between two devices, such as the old dial-up modem or when connecting to a USB.  \\
 Handshake protocol with applied pi-calculus as illustred by \citeauthor{AplliedPiCalsulus2010}:
 \begin{center}
 \includegraphics[width=0.7\textwidth, angle=0]{Graphics/Handshake.pdf}
 \end{center}
-Needham-Schroeder Public key protocol with applied pi-calculus by \citeauthor{DBLP:journals/ftpl/CortierK14,} (Describe P$_{A}$ and P$_{B}$ first):
+Needham-Schroeder Public key protocol with applied pi-calculus by \citeauthor{DBLP:journals/ftpl/CortierK14} (Describe P$_{A}$ and P$_{B}$ first):
 \begin{center}
 \includegraphics[width=0.6\textwidth, angle=0]{Graphics/P1_nspk.pdf}
 \end{center}
