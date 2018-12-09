@@ -16,24 +16,24 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.1}Needham-Schroeder Protocol}{3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1.2}Message deduction}{4}
+\contentsline {subsection}{\numberline {2.1.2}Message deduction}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Applied $\pi $-Calculus}{4}
+\contentsline {section}{\numberline {2.2}Applied $\pi $-Calculus}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Process and Terms}{4}
+\contentsline {subsection}{\numberline {2.2.1}Grammar / Syntax}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Re-visiting the Needham-Schroeder Protocol}{5}
+\contentsline {subsection}{\numberline {2.2.2}Re-visiting the Needham-Schroeder Protocol}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Session Types (and choreography programming)}{5}
+\contentsline {section}{\numberline {2.3}Session Types (and choreography programming)}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Research within the field}{5}
+\contentsline {subsection}{\numberline {2.3.1}Research within the field}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{5}
+\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}TPM}{6}
+\contentsline {section}{\numberline {2.4}TPM}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Evaluation}{6}
+\contentsline {section}{\numberline {2.5}Evaluation}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{7}
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{8}
+\contentsline {chapter}{\numberline {3}Future Plan}{11}

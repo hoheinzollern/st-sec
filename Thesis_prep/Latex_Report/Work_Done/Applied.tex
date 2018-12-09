@@ -14,7 +14,7 @@ Tools such as ProVerif \autocite{ProVerif}, uses a syntax closely related to the
 TODO: Grammar for process as well, as it differs from the Pi-calculus
 
 %"The applied pi calculus (...) is a language for describing concurrent processes and their interactions". \\
-\subsection{Process and Terms}
+\subsection{Grammar / Syntax}
 As mentioned, the applied pi-calculus uses Terms, and such differs from the Pi Calculus, where only names are used, to model messages that are exchanged during a protocol. Terms are built over a signature, names and variables\autocite{AplliedPiCalsulus2010}: (grammar - missing vertical bar)\\
 \begin{center}
 	\begin{tabular} { l l }
@@ -27,6 +27,19 @@ As mentioned, the applied pi-calculus uses Terms, and such differs from the Pi C
 	\end{tabular}
 \end{center}
 
+\begin{center}
+	\begin{tabular} { l l }
+ 		$P,\ Q,\ R$ ::= & plain processes \\ 
+ 		0 & null process \\  
+ 		$P\ |\ Q$ & parallel composition \\
+ 		!$P$ & replication \\
+		$\upnu n.P$ & name restriction \\
+		if \textit{M = N} then \textit{P} else \textit{Q} & conditional \\
+		$u(x).P$ & message input \\
+		$\overline{u}\langle M\rangle .P $ & message output 
+	\end{tabular}
+\end{center}
+(Note on different notation!)
 
 \subsection{Re-visiting the Needham-Schroeder Protocol}
 Having established an understanding of how the the applied pi-calculus differentiate from the pi-calculus, we can now use it to get a better understanding of the Needham-Schroeder Protocol previously introduced.\\
@@ -34,10 +47,23 @@ Having established an understanding of how the the applied pi-calculus different
 First of, we look at the simple Handshake protocol used for setting the parameters for communication between two devices, such as the old dial-up modem or when connecting to a USB.  \\
 Handshake protocol with applied pi-calculus as illustred by \citeauthor{AplliedPiCalsulus2010}:
 \begin{center}
-\includegraphics[width=0.7\textwidth, angle=0]{Graphics/Handshake.pdf}
+\includegraphics[width=0.75\textwidth, angle=0]{Graphics/Handshake.pdf}
 \end{center}
-Needham-Schroeder Public key protocol with applied pi-calculus by \citeauthor{DBLP:journals/ftpl/CortierK14} (Describe P$_{A}$ and P$_{B}$ first):
+
+Description of Alice and Bob's processes (P$_a$ + P$_b$):
+\begin{center}
+\includegraphics[width=0.65\textwidth, angle=0]{Graphics/P_A.pdf}
+\end{center}
+\begin{center}
+\includegraphics[width=0.55\textwidth, angle=0]{Graphics/P_B.pdf}
+\end{center}
+
+Needham-Schroeder Public key protocol without the Lowe modification, written in applied pi-calculus by \citeauthor{DBLP:journals/ftpl/CortierK14} (Describe P$_{A}$ and P$_{B}$ first):
 \begin{center}
 \includegraphics[width=0.6\textwidth, angle=0]{Graphics/P1_nspk.pdf}
+\end{center}
+Needham-Schroeder Lowe Public key protocol written in applied pi-calculus by \citeauthor{DBLP:journals/ftpl/CortierK14} (Describe P$_{A}$ and P$_{B}$ first):
+\begin{center}
+\includegraphics[width=0.6\textwidth, angle=0]{Graphics/P5_nspk.pdf}
 \end{center}
 TODO: Do description and explanation of both 
