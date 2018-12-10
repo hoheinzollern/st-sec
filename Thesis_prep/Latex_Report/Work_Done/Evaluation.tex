@@ -6,22 +6,47 @@
 
 \subsection{TPM as Session Types}
 
+TPM $\rightarrow$ KeyStorage (parameters)\\
+TPM $\rightarrow$ Alice : PrivateKey. rec a \\
+
 $\left\{
-\begin{tabular}{ l }
-	\textit{Read}: \enspace Alice $\rightarrow$ TPM : Read. PCR $\rightarrow$ TPM : vlaue. TPM $\rightarrow$ PCR : value. TPM $\rightarrow$ Alice : value \\
-	\textit{Quote}: \enspace Alice $\rightarrow$ TPM : Quote. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value TPM $\rightarrow$ Alice : CertPCR\\
-	\textit{CreateWrapKey}: \enspace Alice $\rightarrow$ TPM : CreateWrapKey. PCR $\rightarrow$ TPm : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. ?(new key)?. TPM $\rightarrow$ Alice : data\\
-	\textit{LoadKey2}: \enspace Alice $\rightarrow$ TPM : LoadKey2. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ KeyTable : KeyLoaded\\
-	\textit{CertifyKey}: \enspace Alice $\rightarrow$ TPM : data. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : Cert \\
-	\textit{Unbind}: \enspace Alice $\rightarrow$ TPM : unbind. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : adec\\
-	\textit{Seal}: \enspace Alice $\rightarrow$ TPM : data. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : data\\
-	\textit{Unseal}: \enspace Alice $\rightarrow$ TPM : unseal. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : KeyLoaded\\
-	\textit{Extend}: \enspace Alice $\rightarrow$ TPM : extend. PCR $\rightarrow$ TPM : value. TPm $\rightarrow$ PCR : hpcr
+\begin{tabular}{ l p{10cm} }
+	\textit{Read}: & Alice $\rightarrow$ TPM : read. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. TPM $\rightarrow$ Alice : value. rec a \\
+	\textit{Quote}: & Alice $\rightarrow$ TPM : quote. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. TPM $\rightarrow$ Alice : CertPCR. rec a\\
+	\textit{CreateWrapKey}: & Alice $\rightarrow$ TPM : CreateWrapKey. PCR $\rightarrow$ TPm : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. \textbf{?(new key)?}. TPM $\rightarrow$ Alice : data. rec a\\
+	\textit{LoadKey2}: & Alice $\rightarrow$ TPM : LoadKey2. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ KeyTable : KeyLoaded. rec a\\
+	\textit{CertifyKey}: & Alice $\rightarrow$ TPM : data. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : Cert. rec a \\
+	\textit{Unbind}: & Alice $\rightarrow$ TPM : unbind. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : adec. rec a\\
+	\textit{Seal}: & Alice $\rightarrow$ TPM : data. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : data. rec a\\
+	\textit{Unseal}: & Alice $\rightarrow$ TPM : unseal. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : KeyLoaded. rec a\\
+	\textit{Extend}: & Alice $\rightarrow$ TPM : extend. PCR $\rightarrow$ TPM : value. TPm $\rightarrow$ PCR : hpcr. rec a
 \end{tabular}
 \right.$
 
-\begin{center}
-\includegraphics[width=1.2\textwidth, angle=0]{Graphics/Global_Types.pdf}
-\end{center}
+%\begin{center}
+%\includegraphics[width=1.2\textwidth, angle=0]{Graphics/Global_Types.pdf}
+%\end{center}
+\bigbreak
+\bigbreak
+\noindent TODO: Description of above (+ code in appendix? for refs.)
 
-TODO: Description of above (+ code in appendix? for refs.)
+% Extra
+\iffalse
+$\left\{
+\begin{tabular}{ l }
+	\textit{Read}: \enspace Alice $\rightarrow$ TPM : read. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value.
+	 \\ \hspace{4em} TPM $\rightarrow$ Alice : value. rec a \\
+	\textit{Quote}: \enspace Alice $\rightarrow$ TPM : quote. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. 
+	\\ \hspace{4em} TPM $\rightarrow$ Alice : CertPCR. rec a\\
+	\textit{CreateWrapKey}: \enspace Alice $\rightarrow$ TPM : CreateWrapKey. PCR $\rightarrow$ TPm : value. 
+	\\ \hspace{4em} TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. \textbf{?(new key)?}. 
+	\\ \hspace{4em} TPM $\rightarrow$ Alice : data. rec a\\
+	\textit{LoadKey2}: \enspace Alice $\rightarrow$ TPM : LoadKey2. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ KeyTable : KeyLoaded. rec a\\
+	\textit{CertifyKey}: \enspace Alice $\rightarrow$ TPM : data. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : Cert. rec a \\
+	\textit{Unbind}: \enspace Alice $\rightarrow$ TPM : unbind. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : adec. rec a\\
+	\textit{Seal}: \enspace Alice $\rightarrow$ TPM : data. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : data. rec a\\
+	\textit{Unseal}: \enspace Alice $\rightarrow$ TPM : unseal. PCR $\rightarrow$ TPM : value. TPM $\rightarrow$ PCR : value. KeyTable $\rightarrow$ TPM : KeyLoaded. TPM $\rightarrow$ Alice : KeyLoaded. rec a\\
+	\textit{Extend}: \enspace Alice $\rightarrow$ TPM : extend. PCR $\rightarrow$ TPM : value. TPm $\rightarrow$ PCR : hpcr. rec a
+\end{tabular}
+\right.$
+\fi

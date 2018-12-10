@@ -1,14 +1,32 @@
-\section{Session Types (and choreography programming)}
+\section{Session Types}
+As with the applied pi-calculus, session types also have its root in the process calculus, and can be thought of as types for protocols. The idea behind session types, is to describe the communication protocols as a type, that can be checked either at compile-time or runtime, and thus ensure that well-typed programs are well behaved. Essential to session types is the distinction between binary and multiparty communication channels where the binary sessions allow for only two participants, while the multiparty can have zero or more partners. Only the basic definitions of session types will be presented here and will refer the reader to articles such as \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} for a deeper introduction. 
+
+\subsection{Binary Session Types}
+Session types allow for more structure to channel types, by defining the input, output and linear types. With pi calculus we are only able to keep track of the number of arguments passed through a channel, so preventing that the number of channels send by a participant is different from the recipients expectations. With session type we can define the types passed i.e. \textit{(nat, (nat))} that describes a channel where the recipient expects a pair of values of natural numbers and a channel on which it will reply another natural number.
+
+Furthermore it allows for even more refinement, by including information on how channels are used in relation to input and output types. For the input types (processes that can only write on channels) the following notation is used !(\textit{T$_1$,...,T$_n$}). For output types (processes that can only write on channels) the following notation is used ?(\textit{T$_1$,...,T$_n$}). With the previous mentioned channel we can now define it in more detail ?(\textit{nat, }!(\textit{nat})) where the channel can only read a pair of nat values, and write a natural number. \\ 
+Missing: \\
+ - Linear types \\
+ - Binary session types \\
+
+%TODO: Description of session types and what they are used for (behavioural types - which is also behavioural contracts)
+TODO: short description of choreography programming
+
+\subsection{Global Session Types}
+Global session types extend the theory of binary session types to include more than two participants. \\
+TODO:  + Examples (bank, ATM and client example)
+
+\subsection{Research within the field}
+TODO: \\
+
+
+% note to self: 
+% Behavioural Types - describe the dynamic aspects of programs
+% Data Types -  describe the fixed structure of data
+
+\iffalse
 Maybe Sections instead: \\
  - Behavioural Types \\
  - Session Types \\
  - Examples of global types \\ \\
-TODO: Description of session types and what they are used for (behavioural types - which is also behavioural contracts)
-
-\subsection{Research within the field}
-TODO: \\
-Binary Sessions (exactly two participants) \\
-Global Session (multiparty interaction)
-
-\subsection{Global Session Types}
-TODO:  + Examples
+ \fi

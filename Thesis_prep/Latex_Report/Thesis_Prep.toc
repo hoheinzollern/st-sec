@@ -18,22 +18,32 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.1.2}Message deduction}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Applied $\pi $-Calculus}{5}
+\contentsline {section}{\numberline {2.2}Applied $\pi $-Calculus}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.1}Grammar / Syntax}{6}
+\contentsline {subsection}{\numberline {2.2.1}Syntax}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2.2}Re-visiting the Needham-Schroeder Protocol}{6}
+\contentsline {subsection}{\numberline {2.2.2}Re-visiting the Needham-Schroeder Protocol}{7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.3}Session Types (and choreography programming)}{8}
+\contentsline {section}{\numberline {2.3}Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Research within the field}{8}
+\contentsline {subsection}{\numberline {2.3.1}Binary Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{8}
+\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}TPM}{8}
+\contentsline {subsection}{\numberline {2.3.3}Research within the field}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Evaluation}{9}
+\contentsline {section}{\numberline {2.4}TPM}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{9}
+\contentsline {subsection}{\numberline {2.4.1}The API and its commands}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{11}
+\contentsline {subsection}{\numberline {2.4.2}Example of commands}{10}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.5}Evaluation}{10}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{11}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Future Plan}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}Introducing an adversary}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Compiler}{12}
