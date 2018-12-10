@@ -3,6 +3,8 @@ The Trusted Platform Module (TPM) is a specialised chip that stores RSA encrypti
 The TPM contains an RSA key pair called the Endorsement Key (EK), together with an owner-specified password. The Storage Root Key (SRK) is created when a user or administrator takes ownership of the system (rephrase), and works in a tree like structure to store TPM generated RSA keys used. \\ \\
 
 \subsection{The API and its commands}
+As the TPM offers more than 90 different commands, the report will only focus on a small sample of these. 
+
 The TPM offers two authorisation sessions:
 \begin{itemize}
   \item Object Independent Authorisation Protocol (OIAP)

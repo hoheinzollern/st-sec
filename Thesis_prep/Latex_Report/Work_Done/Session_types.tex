@@ -14,19 +14,20 @@ Furthermore it allows for even more refinement, by including information on how 
 %TODO: Description of session types and what they are used for (behavioural types - which is also behavioural contracts)
 
 \subsection{Multiparty Session Types}
-Multiparty session types extend the theory of binary session types to include more than two participants. It does so by describing interactions of a session in a top-down manner as a \textit{global description} of all the messages exchanged, instead of separately looking at the behaviour of each individual channel endpoint, as done so in binary session types. This can ensure protocol conformance and preventing deadlocks, while making it easier to detect errors both manually and by automatic means. As a consequence of multiple participants, \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).  %\autocite{DBLP:journals/csur/HuttelLVCCDMPRT16}.
+Multiparty session types extend the theory of binary session types to include more than two participants. It does so by describing interactions of a session in a top-down manner as a \textit{global description} of all the messages exchanged, instead of separately looking at the behaviour of each individual channel endpoint, as done so in binary session types. This can ensure protocol conformance and preventing deadlocks, while making it easier to detect errors both manually and by automatic means.  %\autocite{DBLP:journals/csur/HuttelLVCCDMPRT16}.
 
 Taking an example made by \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} of an interaction between three participants of a Client, ATM and the Bank, we can here show how an implementation of global session types look:
 \begin{center}
 \includegraphics[width=1.0\textwidth, angle=0]{Graphics/Client_ATM.pdf}
 \end{center}
-First we have that the Client interacts with ATM, where the ATM expects a string input from the Client, and is one of the key interactions operations of \textit{global types}. The ATM then branches and gives the Client four different options to choose from; \textit{deposit, withdraw, balance)} or \textit{quit}, from which the ATM further sends the selected branch to the Bank. Looking at \textit{deposit}, we can tell that the ATM expects a natural number from the client, 
+First we have that the Client interacts with the ATM, here expecting a string input from the Client, which is one of the key interactions operations of \textit{global types}. The ATM then branches and gives the Client four different options to choose from; \textit{deposit, withdraw, balance} or \textit{quit}, from which the ATM further reports the selected branch to the Bank. Looking at \textit{deposit}, we can tell that the ATM expects a natural number from the client, and then reports the branch picked by the Client, to the Bank. The same happens in \textit{withdraw}, but here the ATM further branches into the selection of \textit{dispence} or \textit{overdraft}.
 \\ \\
-Thus \textit{global types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  
+Thus \textit{global session types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  
 
 \subsection{Research within the field}
-TODO: \\ \\
-
+TODO: \\
+ As a consequence of multiple participants \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).   % https://www.sciencedirect.com/science/article/pii/S2352220817301487
+ \\ \\
 TODO: short description of choreography programming
 
 % note to self: 
