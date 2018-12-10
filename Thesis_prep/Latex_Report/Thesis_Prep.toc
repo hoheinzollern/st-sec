@@ -6,9 +6,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Motivation}{1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Current research}{1}
+\contentsline {section}{\numberline {1.2}Current research}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Intended outcome}{1}
+\contentsline {section}{\numberline {1.3}Intended outcome}{2}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {2}Work Done}{3}
 \defcounter {refsection}{0}\relax 
