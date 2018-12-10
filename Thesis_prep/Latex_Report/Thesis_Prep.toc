@@ -28,22 +28,22 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.1}Binary Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.2}Global Session Types}{9}
+\contentsline {subsection}{\numberline {2.3.2}Multiparty Session Types}{9}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.3}Research within the field}{10}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.4}TPM}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.1}The API and its commands}{10}
+\contentsline {subsection}{\numberline {2.4.1}The API and its commands}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Example of commands}{10}
+\contentsline {subsection}{\numberline {2.4.2}Example of commands}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Evaluation}{10}
+\contentsline {section}{\numberline {2.5}Evaluation}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{11}
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{12}
+\contentsline {chapter}{\numberline {3}Future Plan}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introducing an adversary}{12}
+\contentsline {section}{\numberline {3.1}Introducing an adversary}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Compiler}{12}
+\contentsline {section}{\numberline {3.2}Compiler}{13}
