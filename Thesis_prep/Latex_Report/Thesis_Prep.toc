@@ -30,20 +30,18 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Multiparty Session Types}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.3}Research within the field}{10}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.4}TPM}{11}
+\contentsline {section}{\numberline {2.4}TPM}{10}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.1}The API and its commands}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.4.2}Example of commands}{11}
+\contentsline {subsection}{\numberline {2.4.2}Example of commands}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Evaluation}{12}
+\contentsline {section}{\numberline {2.5}Evaluation}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{12}
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{14}
+\contentsline {chapter}{\numberline {3}Future Plan}{15}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introducing an adversary}{14}
+\contentsline {section}{\numberline {3.1}Introducing an adversary}{15}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Compiler}{14}
+\contentsline {section}{\numberline {3.2}Compiler}{15}

@@ -1,16 +1,23 @@
 \section{TPM}
 The Trusted Platform Module (TPM) is a specialised chip that stores RSA encryption keys specific for the host system for hardware authentication. It is used as a component on an endpoint device and is used for the Windows BitLocker.
-The TPM contains an RSA key pair called the Endorsement Key (EK), together with an owner-specified password. The Storage Root Key (SRK) is created when a user or administrator takes ownership of the system (rephrase), and works in a tree like structure to store TPM generated RSA keys used. \\ \\
+The TPM contains an RSA key pair of the Endorsement Key (EK) and the owner-specified password. When a user takes ownership of the TPM, a \textit{Storage Root Key} (SRK) is generated. The SRK works as the root of a tree like structure, where future keys are stored, by which are used for encrypting data. To each TPM key a 160-bit string is associated called the \textit{authdata}, and works like a password to authorise the use of a key. \\ \\
 
 \subsection{The API and its commands}
-As the TPM offers more than 90 different commands, the report will only focus on a small sample of these. 
-
-The TPM offers two authorisation sessions:
+The API offers operations related to; \textit{Secure key management and storage}, which generates new key and impose restrictions on their use; \textit{Platform configuration registers (PCR)} which stores hashes of measurements taken by external software and later lock those by signing them with a specified key. This allows for the TPM to provide \textit{root of trust} for a variety of applications such as:
+\begin{itemize}
+	\item \textit{Secure storage}: allows the user to securely store content which is encrypted with a key only available to the TPM
+	\item \textit{Platform authentication}: a platform can obtain keys by which it can authenticate itself reliably (rewrite)
+	\item \textit{Platform measurement and reporting}: A platform can create reports of its integrity and configuration state that can be relied on by a remote verifier (rewirte)
+\end{itemize}
+The TPM's application program interface (API) offers a wide variety of commands, that e.g. allow the user to load new keys or certify a key by another one. As the TPM offers more than 90 different commands through its application program interface (API), the report will only focus on a small sample of these. Each command has to be called inside an \textit{authorisation session}, so the user will first have to choose between one of the following sessions:
 \begin{itemize}
   \item Object Independent Authorisation Protocol (OIAP)
   \item Object Specific Authorisation Protocol (OSAP)
 \end{itemize}
-The OIAP creates a session that can manipulate any object, but will only work with certain commands. The OSAP creates a session that can only manipulate a specific object, specified at the session start.
+The OIAP creates a session that can manipulate any object, but will only work with certain commands. When setting up the session, the TPM will send back a \textit{session handle} and a fresh \textit{even nonce} as part of its arguments. 
+The OSAP creates a session that can only manipulate a specific object, specified at the session start, so when starting the session, the user will have to send with it the \textit{key handle} of the object and an \textit{odd nonce}. \\
+This rotation of nonces, with the user's defined as \textit{odd nonces} and the TPM's as \textit{even nonce}, guarantees freshness of the commands and responses, which are then encrypted with an HMAC and works as a \textit{shared secret} hmac($auth, \langle Ne^{OSAP}, No^{OSAP} \rangle $). 
+
 
 \subsection{Example of commands}
 Session illustration (from attack, solution... article?) \\

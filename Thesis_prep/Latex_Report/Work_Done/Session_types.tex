@@ -22,12 +22,13 @@ Taking an example made by \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} of a
 \end{center}
 First we have that the Client interacts with the ATM, here expecting a string input from the Client, which is one of the key interactions operations of \textit{global types}. The ATM then branches and gives the Client four different options to choose from; \textit{deposit, withdraw, balance} or \textit{quit}, from which the ATM further reports the selected branch to the Bank. Looking at \textit{deposit}, we can tell that the ATM expects a natural number from the client, and then reports the branch picked by the Client, to the Bank. The same happens in \textit{withdraw}, but here the ATM further branches into the selection of \textit{dispence} or \textit{overdraft}.
 \\ \\
-Thus \textit{global session types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  
+Thus \textit{global types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  
 
+\iffalse
 \subsection{Research within the field}
 TODO: \\
- As a consequence of multiple participants \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).   % https://www.sciencedirect.com/science/article/pii/S2352220817301487
- \\ \\
+ As a consequence of multiple participants \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).   % https://www.sciencedirect.com/science/article/pii/S2352220817301487 
+ \fi
 TODO: short description of choreography programming
 
 % note to self: 
