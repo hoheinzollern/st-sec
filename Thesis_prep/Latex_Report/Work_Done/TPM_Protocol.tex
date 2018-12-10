@@ -1,0 +1,51 @@
+\begin{center}
+\begin{tikzpicture}[node distance=12cm,auto,>=stealth']
+    \node[] (TPM) {\textbf{TPM}};
+    \node[left = of TPM] (User) {\textbf{User}};
+    \node[below of=TPM, node distance=15cm] (TPM_ground) {};
+    \node[below of=User, node distance=15cm] (User_ground) {};
+    %
+    \draw (User) -- (User_ground); % horizontal lines
+    \draw (TPM) -- (TPM_ground); % horizontal lines
+    \draw[->] ($(User)!0.10!(User_ground)$) -- node[above,scale=1,near start]{\quad TPM\_OSAP($pkh, No^{OSAP}$)} ($(TPM)!0.10!(TPM_ground)$);
+    \draw[<-] ($(User)!0.15!(User_ground)$) -- node[above,scale=1,near end]{$ah, Ne, Ne^{OSAP}$} ($(TPM)!0.15!(TPM_ground)$);
+    \draw[->] ($(User)!0.30!(User_ground)$) -- node[above,scale=1,midway]{TPM\_CreateWrapKey(..., hmac$_S$(\textit{Ne, No,..}))} ($(TPM)!0.30!(TPM_ground)$);
+    \draw[<-] ($(User)!0.35!(User_ground)$) -- node[above,scale=1,near end]{Keyblob, \textit{Ne'}, hmac$_S$(\textit{Ne', No,..})} ($(TPM)!0.35!(TPM_ground)$);
+    \draw[->] ($(User)!0.45!(User_ground)$) -- node[above,scale=1,near start]{TPM\_OIAP()} ($(TPM)!0.45!(TPM_ground)$);
+    \draw[<-] ($(User)!0.50!(User_ground)$) -- node[above,scale=1,near end]{\textit{ah, Ne''}} ($(TPM)!0.50!(TPM_ground)$);
+    \draw[->] ($(User)!0.55!(User_ground)$) -- node[above,scale=1,midway]{TPM\_LoadKey2(...,\textit{pkh}, keyblob, hmac$_{ad(\textit{pkh})}$(\textit{Ne'', No',..}))} ($(TPM)!0.55!(TPM_ground)$);
+    \draw[<-] ($(User)!0.60!(User_ground)$) -- node[above,scale=1,near end]{\textit{kh, Ne''', hmac$_{ad(\textit{pkh})}$(\textit{Ne''', No',..})}} ($(TPM)!0.60!(TPM_ground)$);
+    \draw[->] ($(User)!0.65!(User_ground)$) -- node[above,scale=1,near start]{TPM\_OSAP($pkh, No^{OSAP'}$)} ($(TPM)!0.65!(TPM_ground)$);
+    \draw[<-] ($(User)!0.70!(User_ground)$) -- node[above,scale=1,near end]{ah'', Ne'''', Ne$^{OSAP'}$} ($(TPM)!0.70!(TPM_ground)$);
+    \draw[->] ($(User)!0.90!(User_ground)$) -- node[above,scale=1,near start]{TPM\_Seal(\textit{ah'', kh, No''},..., S')} ($(TPM)!0.90!(TPM_ground)$);
+    \draw[<-] ($(User)!0.95!(User_ground)$) -- node[above,scale=1,near end]{sealedblob, \textit{Ne''''', S'}} ($(TPM)!0.95!(TPM_ground)$);
+\end{tikzpicture}
+\end{center}
+
+\begin{tabular} { |c| }
+\hline
+\textit{S} = hmac$_{ad(pkh)}$ ($Ne^{OSAP}, No^{OSAP}$) \\ 
+\hline
+\end{tabular}
+\\ \\
+\begin{tabular} { |c| }
+\hline
+\textit{S'} = hmac$_{ad(kh)}$ ($Ne^{OSAP'}, No^{OSAP'}$) \\ 
+\hline
+\end{tabular}
+
+
+\iffalse
+    \draw[->] ($(User)!0.25!(User_ground)$) -- node[above,scale=1,near start]{\quad TPM\_OSAP($pkh, No^{OSAP}$)} ($(TPM)!0.25!(TPM_ground)$);
+    \draw[<-] ($(User)!0.35!(User_ground)$) -- node[above,scale=1,near end]{$ah, Ne, Ne^{OSAP}$} ($(TPM)!0.35!(TPM_ground)$);
+    \draw[->] ($(User)!0.45!(User_ground)$) -- node[above,scale=1,near start]{TPM\_CreateWrapKey(...)} ($(TPM)!0.45!(TPM_ground)$);
+    \draw[<-] ($(User)!0.55!(User_ground)$) -- node[above,scale=1,near end]{Keyblob} ($(TPM)!0.55!(TPM_ground)$);
+    \draw[->] ($(User)!0.75!(User_ground)$) -- node[above,scale=1,near start]{TPM\_OIAP()} ($(TPM)!0.75!(TPM_ground)$);
+    \draw[<-] ($(User)!0.85!(User_ground)$) -- node[above,scale=1,near end]{ah, ne} ($(TPM)!0.85!(TPM_ground)$);
+    \draw[->] ($(User)!0.95!(User_ground)$) -- node[above,scale=1,near start]{TPM\_LoadKey2} ($(TPM)!0.95!(TPM_ground)$);
+    \draw[<-] ($(User)!1.05!(User_ground)$) -- node[above,scale=1,near end]{Kh, ne, hmac(..)} ($(TPM)!1.05!(TPM_ground)$);
+    \draw[->] ($(User)!1.25!(User_ground)$) -- node[above,scale=1,near start]{TPM\_OSAP(...)} ($(TPM)!1.25!(TPM_ground)$);
+    \draw[<-] ($(User)!1.35!(User_ground)$) -- node[above,scale=1,near end]{ah, ne, ne} ($(TPM)!1.35!(TPM_ground)$);
+    \draw[->] ($(User)!1.55!(User_ground)$) -- node[above,scale=1,near start]{TPM\_Seal(...)} ($(TPM)!1.55!(TPM_ground)$);
+    \draw[<-] ($(User)!1.65!(User_ground)$) -- node[above,scale=1,near end]{sealedblob} ($(TPM)!1.65!(TPM_ground)$);
+\fi

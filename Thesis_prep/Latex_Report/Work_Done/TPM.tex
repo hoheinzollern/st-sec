@@ -16,11 +16,22 @@ The TPM's application program interface (API) offers a wide variety of commands,
 \end{itemize}
 The OIAP creates a session that can manipulate any object, but will only work with certain commands. When setting up the session, the TPM will send back a \textit{session handle} and a fresh \textit{even nonce} as part of its arguments. 
 The OSAP creates a session that can only manipulate a specific object, specified at the session start, so when starting the session, the user will have to send with it the \textit{key handle} of the object and an \textit{odd nonce}. \\
-This rotation of nonces, with the user's defined as \textit{odd nonces} and the TPM's as \textit{even nonce}, guarantees freshness of the commands and responses, which are then encrypted with an HMAC and works as a \textit{shared secret} hmac($auth, \langle Ne^{OSAP}, No^{OSAP} \rangle $). 
-
+This rotation of nonces, with the user's defined as \textit{odd nonces} and the TPM's as \textit{even nonce}, guarantees freshness of the commands and responses, which are then encrypted with an HMAC and works as a \textit{shared secret} hmac($auth, \langle Ne^{OSAP}, No^{OSAP} \rangle $). \\ \\
 
 \subsection{Example of commands}
-Session illustration (from attack, solution... article?) \\
-Examples of TPM commands with applied pi-calculus
+To illustrate the exchange of message between the TPM and a user, three commands besides the OIAP and OSAP has been chosen to get a better look at the authorisation going on:
+\begin{itemize}
+	\item \textit{TPM\_CreateWrapKey}: Creates a new key in the storage key tree
+	\item \textit{TPM\_LoadKey2}: Load key from tree into the TPM internal memory
+	\item \textit{TPM\_Seal}: Uses key to encrypt data
+\end{itemize}
+TODO: describe pkh!
+In the following illustration, the user starts with creating an OSAP session with the TPM to generate a \textit{shared secret} = \textit{S}. \\ \\
+\begin{center}
+\includegraphics{Graphics/Diagram}
+\end{center}
+%\input{Work_Done/TPM_Protocol} 
+
+%Examples of TPM commands with applied pi-calculus ?
 
 %Note: remote attestation

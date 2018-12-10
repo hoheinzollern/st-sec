@@ -36,12 +36,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.4.2}Example of commands}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.5}Evaluation}{13}
+\contentsline {section}{\numberline {2.5}Evaluation}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{13}
+\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}Future Plan}{15}
+\contentsline {chapter}{\numberline {3}Future Plan}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Introducing an adversary}{15}
+\contentsline {section}{\numberline {3.1}Introducing an adversary}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Compiler}{15}
+\contentsline {section}{\numberline {3.2}Compiler}{16}
