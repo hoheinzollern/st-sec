@@ -17,7 +17,9 @@
 %\usepackage{mscgen} % sequence diagram
 \usepackage{tikz} % sequence diagram
 \usepackage{graphicx} % for inserting pictures
-\usetikzlibrary{calc,positioning,arrows}
+\usetikzlibrary{calc,positioning,arrows} 
+
+\usepackage{setspace} % for spacings
 
 \usepackage{todonotes} % for TODOs
 
@@ -33,13 +35,15 @@
 {\textbar}\hspace{20pt}}{0pt}{\LARGE\bfseries}
 
 % Customized Section titles
-\titleformat*{\section}{\large\bfseries}
-\titleformat*{\subsection}{\normalsize\bfseries}
+%\titleformat*{\section}{\large\bfseries}
+%\titleformat*{\subsection}{\normalsize\bfseries}
 
 % bibliography
 \usepackage[backend=bibtex,style=ieee]{biblatex}
 \bibliography{Literature} 
 \bibliography{Online} 
+
+\linespread{1.2}
 
 \title{Extending Session Types to Model Security Properties}
 \author{Julie Tollund}
@@ -48,10 +52,13 @@
 \pagenumbering{gobble}
 %\includepdf{frontpage}   // include ITU front page
 \pagenumbering{roman}
+\begin{spacing}{1}
 \maketitle
+
 
 \setlength{\cftbeforesecskip}{10pt}  % set spacing
 \tableofcontents
+\end{spacing}
 % TODO: Glossary and Acronyms?
 \clearpage
 
@@ -68,12 +75,13 @@
 \clearpage
 \pagenumbering{roman}
 \appendix
-
+\begin{spacing}{1}
 \nocite{*}  % for no references but still print
 \printbibliography[title={References},nottype=misc]
 \printbibliography[title={Online references},type=misc]
 % \citeauthor{name}
 % \autocite{name}
 % \textquote{\textit{quote}}\autocite
+\end{spacing}
 
 \end{document}
