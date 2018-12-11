@@ -26,7 +26,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.3}Session Types}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3.1}Binary Session Types}{11}
+\contentsline {subsection}{\numberline {2.3.1}Binary Session Types}{10}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {2.3.2}Multiparty Session Types}{12}
 \defcounter {refsection}{0}\relax 
