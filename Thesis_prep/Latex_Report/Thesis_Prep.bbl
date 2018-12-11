@@ -17,106 +17,6 @@
 \endgroup
 
 \sortlist[entry]{none/global/}
-  \entry{AplliedPiCalsulus2010}{article}{}
-    \name{author}{2}{}{%
-      {{hash=RMD}{%
-         family={Ryan},
-         familyi={R\bibinitperiod},
-         given={Mark\bibnamedelima D.},
-         giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
-      }}%
-      {{hash=SB}{%
-         family={Smyth},
-         familyi={S\bibinitperiod},
-         given={Ben},
-         giveni={B\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{RMDSB1}
-    \strng{fullhash}{RMDSB1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{title}{Applied pi calculus}
-    \field{year}{2010}
-  \endentry
-
-  \entry{DBLP:conf/spw/MukhamedovGR09}{inproceedings}{}
-    \name{author}{3}{}{%
-      {{hash=MA}{%
-         family={Mukhamedov},
-         familyi={M\bibinitperiod},
-         given={Aybek},
-         giveni={A\bibinitperiod},
-      }}%
-      {{hash=GAD}{%
-         family={Gordon},
-         familyi={G\bibinitperiod},
-         given={Andrew\bibnamedelima D.},
-         giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod},
-      }}%
-      {{hash=RM}{%
-         family={Ryan},
-         familyi={R\bibinitperiod},
-         given={Mark},
-         giveni={M\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{MAGADRM1}
-    \strng{fullhash}{MAGADRM1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{booktitle}{Security Protocols XVII, 17th International Workshop,
-  Cambridge, UK, April 1-3, 2009. Revised Selected Papers}
-    \field{title}{Towards a Verified Reference Implementation of a Trusted
-  Platform Module}
-    \field{year}{2009}
-  \endentry
-
-  \entry{DBLP:conf/esorics/GurgensRSAP07}{inproceedings}{}
-    \name{author}{5}{}{%
-      {{hash=GS}{%
-         family={G{\"{u}}rgens},
-         familyi={G\bibinitperiod},
-         given={Sigrid},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=RC}{%
-         family={Rudolph},
-         familyi={R\bibinitperiod},
-         given={Carsten},
-         giveni={C\bibinitperiod},
-      }}%
-      {{hash=SD}{%
-         family={Scheuermann},
-         familyi={S\bibinitperiod},
-         given={Dirk},
-         giveni={D\bibinitperiod},
-      }}%
-      {{hash=AM}{%
-         family={Atts},
-         familyi={A\bibinitperiod},
-         given={Marion},
-         giveni={M\bibinitperiod},
-      }}%
-      {{hash=PR}{%
-         family={Plaga},
-         familyi={P\bibinitperiod},
-         given={Rainer},
-         giveni={R\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{GSRCSD+1}
-    \strng{fullhash}{GSRCSDAMPR1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{booktitle}{Computer Security - {ESORICS} 2007, 12th European
-  Symposium On Research In Computer Security, Dresden, Germany, September
-  24-26, 2007, Proceedings}
-    \field{title}{Security Evaluation of Scenarios Based on the TCG's {TPM}
-  Specification}
-    \field{year}{2007}
-  \endentry
-
   \entry{DBLP:conf/ifip1-7/DelauneKRS10}{inproceedings}{}
     \name{author}{4}{}{%
       {{hash=DS}{%
@@ -153,6 +53,79 @@
   Papers}
     \field{title}{A Formal Analysis of Authentication in the {TPM}}
     \field{year}{2010}
+  \endentry
+
+  \entry{DBLP:journals/ftpl/CortierK14}{article}{}
+    \name{author}{2}{}{%
+      {{hash=CV}{%
+         family={Cortier},
+         familyi={C\bibinitperiod},
+         given={V{\'{e}}ronique},
+         giveni={V\bibinitperiod},
+      }}%
+      {{hash=KS}{%
+         family={Kremer},
+         familyi={K\bibinitperiod},
+         given={Steve},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CVKS1}
+    \strng{fullhash}{CVKS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{number}{3}
+    \field{pages}{151\bibrangedash 267}
+    \field{title}{Formal Models and Techniques for Analyzing Security
+  Protocols: {A} Tutorial}
+    \field{volume}{1}
+    \field{journaltitle}{Foundations and Trends in Programming Languages}
+    \field{year}{2014}
+  \endentry
+
+  \entry{AplliedPiCalsulus2010}{article}{}
+    \name{author}{2}{}{%
+      {{hash=RMD}{%
+         family={Ryan},
+         familyi={R\bibinitperiod},
+         given={Mark\bibnamedelima D.},
+         giveni={M\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=SB}{%
+         family={Smyth},
+         familyi={S\bibinitperiod},
+         given={Ben},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{RMDSB1}
+    \strng{fullhash}{RMDSB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{Applied pi calculus}
+    \field{year}{2010}
+  \endentry
+
+  \entry{ProVerif}{misc}{}
+    \name{author}{1}{}{%
+      {{hash=BB}{%
+         family={Blanchet},
+         familyi={B\bibinitperiod},
+         given={Bruno},
+         giveni={B\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BB1}
+    \strng{fullhash}{BB1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{title}{ProVerif}
+    \verb{url}
+    \verb http://prosecco.gforge.inria.fr/personal/bblanche/proverif/
+    \endverb
+    \field{urlday}{03}
+    \field{urlmonth}{12}
+    \field{urlyear}{2018}
   \endentry
 
   \entry{DBLP:journals/csur/HuttelLVCCDMPRT16}{article}{}
@@ -242,54 +215,6 @@
     \field{year}{2016}
   \endentry
 
-  \entry{DBLP:journals/iandc/Vasconcelos12}{article}{}
-    \name{author}{1}{}{%
-      {{hash=VVT}{%
-         family={Vasconcelos},
-         familyi={V\bibinitperiod},
-         given={Vasco\bibnamedelima T.},
-         giveni={V\bibinitperiod\bibinitdelim T\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{VVT1}
-    \strng{fullhash}{VVT1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{pages}{52\bibrangedash 70}
-    \field{title}{Fundamentals of session types}
-    \field{volume}{217}
-    \field{journaltitle}{Inf. Comput.}
-    \field{year}{2012}
-  \endentry
-
-  \entry{DBLP:journals/ftpl/CortierK14}{article}{}
-    \name{author}{2}{}{%
-      {{hash=CV}{%
-         family={Cortier},
-         familyi={C\bibinitperiod},
-         given={V{\'{e}}ronique},
-         giveni={V\bibinitperiod},
-      }}%
-      {{hash=KS}{%
-         family={Kremer},
-         familyi={K\bibinitperiod},
-         given={Steve},
-         giveni={S\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{CVKS1}
-    \strng{fullhash}{CVKS1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{number}{3}
-    \field{pages}{151\bibrangedash 267}
-    \field{title}{Formal Models and Techniques for Analyzing Security
-  Protocols: {A} Tutorial}
-    \field{volume}{1}
-    \field{journaltitle}{Foundations and Trends in Programming Languages}
-    \field{year}{2014}
-  \endentry
-
   \entry{DBLP:conf/csfw/DelauneKRS11}{inproceedings}{}
     \name{author}{4}{}{%
       {{hash=DS}{%
@@ -328,26 +253,129 @@
     \field{year}{2011}
   \endentry
 
-  \entry{ProVerif}{misc}{}
-    \name{author}{1}{}{%
-      {{hash=BB}{%
-         family={Blanchet},
-         familyi={B\bibinitperiod},
-         given={Bruno},
-         giveni={B\bibinitperiod},
+  \entry{DBLP:conf/spw/MukhamedovGR09}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=MA}{%
+         family={Mukhamedov},
+         familyi={M\bibinitperiod},
+         given={Aybek},
+         giveni={A\bibinitperiod},
+      }}%
+      {{hash=GAD}{%
+         family={Gordon},
+         familyi={G\bibinitperiod},
+         given={Andrew\bibnamedelima D.},
+         giveni={A\bibinitperiod\bibinitdelim D\bibinitperiod},
+      }}%
+      {{hash=RM}{%
+         family={Ryan},
+         familyi={R\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
       }}%
     }
-    \strng{namehash}{BB1}
-    \strng{fullhash}{BB1}
+    \strng{namehash}{MAGADRM1}
+    \strng{fullhash}{MAGADRM1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{title}{ProVerif}
-    \verb{url}
-    \verb http://prosecco.gforge.inria.fr/personal/bblanche/proverif/
-    \endverb
-    \field{urlday}{03}
-    \field{urlmonth}{12}
-    \field{urlyear}{2018}
+    \field{booktitle}{Security Protocols XVII, 17th International Workshop,
+  Cambridge, UK, April 1-3, 2009. Revised Selected Papers}
+    \field{title}{Towards a Verified Reference Implementation of a Trusted
+  Platform Module}
+    \field{year}{2009}
+  \endentry
+
+  \entry{DBLP:conf/esorics/GurgensRSAP07}{inproceedings}{}
+    \name{author}{5}{}{%
+      {{hash=GS}{%
+         family={G{\"{u}}rgens},
+         familyi={G\bibinitperiod},
+         given={Sigrid},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=RC}{%
+         family={Rudolph},
+         familyi={R\bibinitperiod},
+         given={Carsten},
+         giveni={C\bibinitperiod},
+      }}%
+      {{hash=SD}{%
+         family={Scheuermann},
+         familyi={S\bibinitperiod},
+         given={Dirk},
+         giveni={D\bibinitperiod},
+      }}%
+      {{hash=AM}{%
+         family={Atts},
+         familyi={A\bibinitperiod},
+         given={Marion},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=PR}{%
+         family={Plaga},
+         familyi={P\bibinitperiod},
+         given={Rainer},
+         giveni={R\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{GSRCSD+1}
+    \strng{fullhash}{GSRCSDAMPR1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Computer Security - {ESORICS} 2007, 12th European
+  Symposium On Research In Computer Security, Dresden, Germany, September
+  24-26, 2007, Proceedings}
+    \field{title}{Security Evaluation of Scenarios Based on the TCG's {TPM}
+  Specification}
+    \field{year}{2007}
+  \endentry
+
+  \entry{DBLP:conf/ifip1-7/ChenR09}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=CL}{%
+         family={Chen},
+         familyi={C\bibinitperiod},
+         given={Liqun},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=RM}{%
+         family={Ryan},
+         familyi={R\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{CLRM1}
+    \strng{fullhash}{CLRM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{booktitle}{Formal Aspects in Security and Trust, 6th International
+  Workshop, {FAST} 2009, Eindhoven, The Netherlands, November 5-6, 2009,
+  Revised Selected Papers}
+    \field{pages}{201\bibrangedash 216}
+    \field{title}{Attack, Solution and Verification for Shared Authorisation
+  Data in {TCG} {TPM}}
+    \field{year}{2009}
+  \endentry
+
+  \entry{DBLP:journals/iandc/Vasconcelos12}{article}{}
+    \name{author}{1}{}{%
+      {{hash=VVT}{%
+         family={Vasconcelos},
+         familyi={V\bibinitperiod},
+         given={Vasco\bibnamedelima T.},
+         giveni={V\bibinitperiod\bibinitdelim T\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{VVT1}
+    \strng{fullhash}{VVT1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{pages}{52\bibrangedash 70}
+    \field{title}{Fundamentals of session types}
+    \field{volume}{217}
+    \field{journaltitle}{Inf. Comput.}
+    \field{year}{2012}
   \endentry
 \endsortlist
 \endinput

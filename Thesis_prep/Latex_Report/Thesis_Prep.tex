@@ -19,6 +19,9 @@
 \usepackage{graphicx} % for inserting pictures
 \usetikzlibrary{calc,positioning,arrows} 
 
+\usepackage[toc,page]{appendix}
+\usepackage{lineno} %for linenumbering
+
 \usepackage{setspace} % for spacings
 
 \usepackage{todonotes} % for TODOs
@@ -41,7 +44,7 @@
 % bibliography
 \usepackage[backend=bibtex,style=ieee]{biblatex}
 \bibliography{Literature} 
-\bibliography{Online} 
+%\bibliography{Online} 
 
 \linespread{1.2}
 
@@ -50,7 +53,7 @@
 
 \begin{document}
 \pagenumbering{gobble}
-%\includepdf{frontpage}   // include ITU front page
+%\includepdf{ITU_frontpage}   // include ITU front page
 \pagenumbering{roman}
 \begin{spacing}{1}
 \maketitle
@@ -66,7 +69,7 @@
 \chapter{Introduction}
 \input{Introduction}
 
-\chapter{Work Done}
+\chapter{Background Study}
 \input{Work_done}
 
 \chapter{Future Plan}
@@ -77,11 +80,16 @@
 \appendix
 \begin{spacing}{1}
 \nocite{*}  % for no references but still print
-\printbibliography[title={References},nottype=misc]
-\printbibliography[title={Online references},type=misc]
+\printbibliography[title={References}]
+%\printbibliography[title={Online references},type=misc]
 % \citeauthor{name}
 % \autocite{name}
 % \textquote{\textit{quote}}\autocite
+\begin{appendices}
+%\include{Appendix}
+\includepdf[pages={1-5}]{Appendix.pdf}
+\end{appendices}
 \end{spacing}
 
 \end{document}
+%\includegraphics[width=1\textwidth, angle=0]{Appendix.pdf}

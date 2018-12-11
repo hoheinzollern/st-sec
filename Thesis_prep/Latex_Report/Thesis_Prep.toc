@@ -10,7 +10,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.3}Intended outcome}{2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {2}Work Done}{3}
+\contentsline {chapter}{\numberline {2}Background Study}{3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Security Protocols}{3}
 \defcounter {refsection}{0}\relax 
@@ -38,10 +38,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.5}Evaluation}{17}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.5.1}TPM as Session Types}{17}
-\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Future Plan}{19}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Introducing an adversary}{19}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Compiler}{19}
+\contentsline {chapter}{Appendices}{iii}

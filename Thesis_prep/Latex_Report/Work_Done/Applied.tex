@@ -87,8 +87,7 @@ This however represent the naive model of the protocol, so to add the Lowe fix, 
 \begin{center}
 \includegraphics[width=0.6\textwidth, angle=0]{Graphics/P5_nspk.pdf}
 \end{center}
-(TODO: needs further explanation!!)
-TODO: smooth transition to the next chapter + don't forget reference to article!!!
+As can be seen, the input of the public key by Bob, shown as pk($sk_b$), is now replaced by $x_pk$ representing the unknown value of the variable, illustrating how Alice does now know who she is starting a session with. This also highlight the risk of an \textit{reflection attack}, where the intruder tricks the participant to execute a protocol with him/her self. Replication as also been added to the session, as no upper bound has been put for the number of parallel session may be initiated. Last but not least, we showcase that both session may be started by the same participant. All of this allow for an adversary to create an arbitrary number of instances of $P_A$ and $P_B$ with either the same or different private keys \autocite{DBLP:journals/ftpl/CortierK14}.
 
 
 % Extra

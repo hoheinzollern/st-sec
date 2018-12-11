@@ -1,7 +1,19 @@
 \label{chap:Future Plan}
-In the previous chapter I slightly touched upon applying session types to the TPM commands. As could be deducted from this, global session types still exhibits some limitations of its expressivity, which is the prime motivation for the future thesis. 
-\section{Introducing an adversary}
+This section elaborates on the tasks intended for the thesis, building upon the findings in this report. Each of the presented topics provide knowledge on how to construct and reason about communication protocols, and together will form the basis for the future thesis. 
 
-\section{Compiler}
-As part of my thesis, I will also be developing a compiler in F\# for the findings. \\ \\
-Farewell
+\section{Introducing an adversary}
+In the previous chapter I slightly touched upon applying session types to the TPM commands. As could be deducted from this, global session types still exhibits some limitations of its expressivity, which is the prime motivation for the thesis, thus making one of the first tasks to reason about how to extend session types to model security properties and prove protocols such as the TPM. 
+To start this of, I will be focusing on language design and how to change the language of session types to express all the features we want of a security protocol like the TPM. 
+The second phase will be about constructing an analysis procedure for security properties, as secrecy and authentication are important properties of the TPM. For this I will most likely be using existing tools for automated reasoning about security properties found in security protocols such as ProVerif or Tamarin. It should be noted that \citeauthor{DBLP:conf/ifip1-7/ChenR09} had to hand-code their analysis in Horn-Clause (in practice deduction rules) instead of using the applied p-calculus, due to ProVerif not terminating otherwise.
+Next will be the implementation of a model for the TPM in session types, and finally an evaluation of the analysis procedure against the model that has been build, and comparing it to other approaches. 
+As part of my thesis, I will also be developing a compiler in F\# to automate the construction of the protocols.
+\iffalse
+For the future work section:
+Since you?ve seen all these limitations, in the evaluation section, with session types to express security protocols, you would like to study a way to extend them to prove protocols like the TPM one correct.
+The first phase should be language design: how to change the language of session types to express all the features we want of a security protocol like the TPM.
+The second phase should be the construction of an analysis procedure for a security property (secrecy and authentication are important properties in the TPM), possibly using existing tools like ProVerif and Tamarin.
+Next, the implementation of a model for the TPM in session types, possibly simplified if need be.
+Finally, the evaluation of the analysis procedure against the model that we?ve built, and also in comparison to other approaches. 
+
+Mention that the original paper on the TPM had to hand-code their analysis in Horn clauses (in practice deduction rules), instead of directly using the Applied Pi-calculus, because ProVerif would not terminate.
+\fi
