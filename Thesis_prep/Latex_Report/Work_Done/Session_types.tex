@@ -1,14 +1,16 @@
 \section{Session Types}
 % Session types are a typing discipline for processes that exchange messages via channels, and implement sessions with structured protocols featuring inputs/outputs, choices, and recursion
-As with the applied pi-calculus, session types also have its root in the process calculus, and can be thought of as types for protocols. The idea behind session types, is to describe the communication protocols as a type, that can be checked either at compile-time or runtime, and thus ensure that well-typed programs are well behaved. Essential to session types is the distinction between binary and multiparty communication channels where the binary sessions allow for only two participants, while the multiparty session types can have zero or more participants. Only the basic definitions of session types will be presented here and will refer the reader to articles such as \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} for a deeper introduction. 
+As with the applied pi-calculus, session types also have its root in the process calculus, and can be thought of as types for protocols. The idea behind session types, is to describe the communication protocols as a type that can be statically checked and thus ensure that well-typed programs are well behaved. Essential to session types is the distinction between binary and multiparty communication channels, where the binary sessions allow for only two participants, while the multiparty session types can have zero or more participants. Only the basic definitions of session types will be presented here and will refer the reader to articles such as \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} for a deeper introduction. 
 
 \subsection{Binary Session Types}
 % maps channels to session types
 Session types allow for more structure to channel types, by defining the input, output and linear types. With pi calculus we are only able to keep track of the number of arguments passed through a channel, so preventing that the number of channels send by a participant is different from the recipients expectations. With session type we can define the types passed i.e. \textit{(nat, (nat))} that describes a channel where the recipient expects a pair of values of natural numbers and a channel on which it will reply another natural number. \\ \\
-\textbf{Input and Output types} \\
-Furthermore it allows for even more refinement, by including information on how channels are used in relation to input and output types. For the input types (processes that can only write on channels) the following notation is used !(\textit{T$_1$,...,T$_n$}). For output types (processes that can only write on channels) the following notation is used ?(\textit{T$_1$,...,T$_n$}). With the previous mentioned channel we can now define it in more detail ?(\textit{nat, }!(\textit{nat})) where the channel can only read a pair of nat values, and write a natural number. \\ \\
-\textbf{Linear types} \textit{duality} \\ \\
-\textbf{Binary session types} \\ \\
+\textbf{Input and Output types} \qquad
+Session types allow for even more refinement, by including information on how channels are used in relation to input and output types. For the input types (processes that can only write on channels) the following notation is used !(\textit{T$_1$,...,T$_n$}), while for output types (processes that can only write on channels) the following notation is used ?(\textit{T$_1$,...,T$_n$}). With the previous mentioned channel we can now define it in more detail ?(\textit{nat, }!(\textit{nat})) where the channel can only read a pair of nat values and write back a natural number. \\ \\
+\textbf{Linear types}  \qquad 
+Using the idea from linear logic, session types further introduce \textit{multiplicities} on top of polarities to control the number of times a channel can be used. Using the same example, we can now add !$^1(T_1,...T_n)$ to the channel to showcase that it can only be used once for output, while ?$^\omega (T_1,...T_n)$ can be used zero or more times for input. \\ \\
+\textbf{Binary session types} \qquad 
+As binary session types only allow for exactly two participants, we can introduce the \textit{duality} of a session type. If one participant describe the types of a message exchange as !nat.?bool.end, where one expects to output a string and input a boolean, the \textit{dual} would be ?nat.!bool.end, with .end denoting the end of the protocol. Another important construct presented in session types, is \textit{choice}. Choice allow for a participant to choose between multiple options. An example could be the interaction between a client and an ATM, where the ATM present the client with the option to choose either \textit{deposit} or \textit{withdraw}. From the clients point of view, the options would be presented as $\oplus \{ deposit : T_1, withdraw : T_2\}$, while the \textit{dual} seen from the ATM's point of view, would look like $\{deposit : T_3, withdraw : T_4\}$. This also mean that the two types $T_1$ and $T_2$ are a dual of $T_3$ and $T_3$.
 
 
 %TODO: Description of session types and what they are used for (behavioural types - which is also behavioural contracts)
@@ -16,20 +18,22 @@ Furthermore it allows for even more refinement, by including information on how 
 \subsection{Multiparty Session Types}
 Multiparty session types extend the theory of binary session types to include more than two participants. It does so by describing interactions of a session in a top-down manner as a \textit{global description} of all the messages exchanged, instead of separately looking at the behaviour of each individual channel endpoint, as done so in binary session types. This can ensure protocol conformance and preventing deadlocks, while making it easier to detect errors both manually and by automatic means.  %\autocite{DBLP:journals/csur/HuttelLVCCDMPRT16}.
 
-Taking an example made by \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} of an interaction between three participants of a Client, ATM and the Bank, we can here show how an implementation of global session types look:
+Taking the example made by \citeauthor{DBLP:journals/csur/HuttelLVCCDMPRT16} of an interaction between three participants of a Client, ATM and the Bank, we can here show how an implementation of global session types look:
 \begin{center}
 \includegraphics[width=1.0\textwidth, angle=0]{Graphics/Client_ATM.pdf}
 \end{center}
 First we have that the Client interacts with the ATM, here expecting a string input from the Client, which is one of the key interactions operations of \textit{global types}. The ATM then branches and gives the Client four different options to choose from; \textit{deposit, withdraw, balance} or \textit{quit}, from which the ATM further reports the selected branch to the Bank. Looking at \textit{deposit}, we can tell that the ATM expects a natural number from the client, and then reports the branch picked by the Client, to the Bank. The same happens in \textit{withdraw}, but here the ATM further branches into the selection of \textit{dispence} or \textit{overdraft}.
 \\ \\
-Thus \textit{global types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  
+Thus \textit{global types} helps specify the order of the interaction between the three participants in relation to exchanging messages and the order of requests involved.  \\ \\
+TODO: short description of choreography programming
+TODO: ROUNDING AND TRANSISTION
+
 
 \iffalse
 \subsection{Research within the field}
 TODO: \\
- As a consequence of multiple participants \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).   % https://www.sciencedirect.com/science/article/pii/S2352220817301487 
+ As a consequence of multiple participants \textit{duality} cannot be used directly in multiparty session types due to potential 'invisible' communications determining which future input or output will be willing to receive or send from (TODO: further).   % https://www.sciencedirect.com/science/article/pii/S2352220817301487
  \fi
-TODO: short description of choreography programming
 
 % note to self: 
 % Behavioural Types - describe the dynamic aspects of programs
