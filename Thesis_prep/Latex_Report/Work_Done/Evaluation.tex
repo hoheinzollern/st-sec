@@ -5,7 +5,7 @@ Remove all cryptographic messages and simplify stuff, like equality checks. Also
 Another thing that?s missing on the session type is a way to express the violation of a security property (session types are mainly concerned about correctness, but here we want to use them for security, so that?s something missing).
  \fi
 \section{Evaluation}
-With each topic now presented, we need to see how they all come together, to form the basis for the future thesis. As the thesis will focus mostly on session types and the TPM in a security related notion I will be here demonstrate how these can be put together to form TPM commands with session types. To illustrate the TPM commands, the code of \citeauthor{DBLP:conf/csfw/DelauneKRS11} has been used for reference, and can be found in the appendix. In their example we find the commands:
+With each topic now presented, we need to see how they all come together, to form the basis for the future thesis. As the thesis will focus mostly on session types and the TPM in a security related notion I will here demonstrate how these can be put together to form TPM commands with session types. To illustrate the TPM commands, the code of \citeauthor{DBLP:conf/csfw/DelauneKRS11} has been used for reference, and can be found in the appendix. In their example we find the commands:
 \begin{spacing}{1}
 \begin{itemize}
 	\item \textit{Read}: Read the value of the PCR
@@ -19,7 +19,7 @@ With each topic now presented, we need to see how they all come together, to for
 	\item \textit{Extend}: Extends PCR value
 \end{itemize}
 \end{spacing}
-\noindent On the next page, can be seen how each of these commands are constructed by session types. It should be noted, that in the process of constructing the commands, certain limitations were found within the expressivity of session types such as simplifying conditionals and what to do with cryptographic messages. The original pi-calculus model uses memory cells, which might allow for a better way to express this with session types, e.g. using some concept of state. Another thing session types are missing to model security protocols, is a way to express the violation of security properties, as session types are mainly concerned about correctness and thus missing the security part. These concerns are some of the main points for the motivation of the future thesis. 
+\noindent On the next page, can be seen how each of these commands are constructed by session types. It should be noted, that in the process of constructing the commands, certain limitations were found within the expressivity of session types such as simplifying conditionals and what to do with cryptographic messages. The original pi-calculus model uses memory cells, which might allow for a better way to express this with session types, e.g. using some concept of state. Another thing session types are missing to model security protocols, is a way to express the violation of security properties, as session types are mainly concerned about correctness and thus missing the security part. These concerns are some of the main points for the motivation of writing the future thesis. 
 %\subsection{TPM as Session Types}
 \newpage
 \noindent TPM $\rightarrow$ KeyStorage (parameters)\\
@@ -38,6 +38,9 @@ $\left\{
 	\textit{Extend}: & Alice $\rightarrow$ TPM : extend. PCR $\rightarrow$ TPM(pcr\_value). TPM $\rightarrow$ PCR(pcr\_value) : hpcr. rec a
 \end{tabular}
 \right\}.$
+\bigbreak
+\bigbreak
+\noindent The reader will notice that a lot of the commands look very similar, which proves that lack of expressiveness in session types when used on security protocols.
 \end{spacing}
 
 %\begin{center}

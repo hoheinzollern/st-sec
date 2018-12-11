@@ -24,7 +24,7 @@ The gap left between the two participants illustrate the challenge of this proto
 \includegraphics[width=0.55\textwidth, angle=0]{Graphics/Challenge.pdf}
 \end{center}
 
-If the attacker can persuade \textit{A} to initiate a session with him, he relay the messages to \textit{B}, and thus convince him he is communicating with \textit{A}. Lowe suggest a simple solution to this problem, by adding the identity of the sender in the second message so that $\{|\langle N_a, N_b\rangle |\}^a_{pk(a)}$ would now look as such $\{|\langle N_a, \langle N_b, B\rangle \rangle |\}^a_{pk(a)}$
+If the attacker can persuade \textit{A} to initiate a session with him, he relay the messages to \textit{B}, and thus convince him he is communicating with \textit{A}. Lowe suggest a simple solution to this problem, by adding the identity of the sender in the second message so that $\{|\langle N_a, N_b\rangle |\}^a_{pk(a)}$ would now look as such $\{|\langle N_a, \langle N_b, B\rangle \rangle |\}^a_{pk(a)}$. To highlight this vulnerability more clearly, I will revisit the Needham-Schroeder protocol again in the Applied Pi-Calculus section, where a more detailed description of why this attack is possible will be shown. 
 
 
 \iffalse
@@ -49,11 +49,11 @@ Moreover, the protocol should guarantee 'confidentiality' of the nonces Na and N
 \subsection{Message deduction}
 Message deduction is a formal way of figuring out wether a message can be deducted from a priori given set of messages by using induction rules and derivation sequences. Most important is the use of \textit{terms} representing messages. This allows for a better illustration of the keys, identities and nonces, but abstract away the exact values, while still keeping the structure as a special labelled graph. \\ \\
 \textbf{Terms} \qquad
-Functions symbols \textit{f} are used to capture cryptographic primitives such as encryption and one-way hash functions, each with an associated integer as its arity. Function symbols with arity 0 are seen as a constant, while a finite set of functions symbols is called a \textit{signature}. Terms are build by applying function symbols to a infinite set of names \textit{N} (used for keys, nonces or identities), variables \textit{X} and other terms \textit{F}, and can be defined as such \textit{T(F, X, N)}. As can be seen later, variables are often used to represent unknown variables, e.g. components received from another participant of the protocol. \\
+Functions symbols such as \textit{f}, are used to capture cryptographic primitives i.e. encryption and one-way hash functions, each assigned with an associated integer as its arity. Function symbols with arity 0 are seen as a constant, while a finite set of functions symbols is called a \textit{signature}. Terms are build by applying function symbols to a infinite set of names \textit{N} (used for keys, nonces or identities), variables \textit{X} and other terms \textit{F}, and can be defined as such \textit{T(F, X, N)}. As can be seen later, variables are often used to represent unknown variables, e.g. components received from another participant of the protocol. \\
 
 \noindent \textbf{Inference rules}  \qquad
 %TODO: Introduce the Dolev-Yao model from 1981 - first symbolic formalisation of the deductive power of an attacker
-Inference rules uses the following notation $\infer{u} {u_l & ... & u_n}$ with $u_l,...,u_n, u$ as terms with variables. Having a set of inference rules is also called an inference system, and often contains both \textit{composition rules} and \textit{decomposition rules}. Below can be seen an inference system for the Dolev-Yao model ($\mathcal{I}_{DY}$) with the composition rules presented first in each line, and the following being the decomposition rules. 
+Inference rules uses the following notation $\infer{u} {u_l & ... & u_n}$ with $u_l,...,u_n, u$ as terms with variables. Having a set of inference rules is also called an inference system, and often contains both \textit{composition rules} and \textit{decomposition rules}. Below can be seen an inference system for the Dolev-Yao model ($\mathcal{I}_{DY}$) with the composition rules presented first in each line, and the following decomposition rules. 
 \begin{center}
 $\mathcal{I}_{DY}\ :$
 \begin{math}
@@ -71,13 +71,12 @@ $\mathcal{I}_{DY}\ :$
 On the second line we have the rules for symmetric encrypting and decrypting, showing that anyone can decrypt a message if they have the corresponding key. The same goes for the asymmetric encryption and decryption, with the rules shown in the third line. \\
 
 \noindent \textbf{Derivation sequence}  \qquad
-By combining inference rule, we are able to derive new messages. An example is given by \citeauthor{DBLP:journals/ftpl/CortierK14}, illustrating how a set of messages can be derived by an attacker, through the use of the before mentioned inference rules (here represented by a proof tree):
+By combining inference rule, we are able to derive new messages. An example is given by \citeauthor{DBLP:journals/ftpl/CortierK14} with the set of messages $S = \{\langle k_1, k_2\rangle ,\langle k_3, a\rangle , \{|n|\}^a_{\langle k_1, k_3\rangle}\}$, illustrating how the set can be derived by an attacker through the use of the before mentioned inference rules (here represented by a proof tree):
 \begin{center}
 \includegraphics[width=0.55\textwidth, angle=0]{Graphics/Proof_tree.pdf}
 \end{center}
-From $\langle k1, k2\rangle$ the attacker can use the second rule shown, to learn \textit{k1}. Using the same rule, he is also able to obtain \textit{k3} from $\langle k3, a\rangle$. From these two he is now able to decrypt message \textit{n} from $\{|n|\}^s_{\langle k1, k3\rangle}$, and thus get the encrypted message sent. For further illustration it is shown that the attacker is also able to get hold of \textit{a}, which in turn is called that $\langle n, a\rangle$ is \textit{deducible} from the set of messages.
+From $\langle k1, k2\rangle$ the attacker can use the second rule shown, to learn \textit{k1}. Using the same rule, he is also able to obtain \textit{k3} from $\langle k3, a\rangle$. From these two he is now able to decrypt message \textit{n} from $\{|n|\}^s_{\langle k1, k3\rangle}$, and thus get the encrypted message sent. For further illustration it is shown that the attacker is also able to get hold of \textit{a}, which in turn is called that $\langle n, a\rangle$ is \textit{deducible} from the set of messages $S$. \\ \\
 
- 
 
 %\subsection{Examples}
 %TODO: show examples of a man in the middle attack on the NS and DH protocols: \\ \\

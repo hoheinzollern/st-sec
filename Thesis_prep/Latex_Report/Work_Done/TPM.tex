@@ -1,6 +1,6 @@
 \section{TPM} % Multiple attack has been found - ref articles in bib
-The Trusted Platform Module (TPM) is a specialised chip that stores RSA encryption keys specific for the host system for hardware authentication. It is used as a component on an endpoint device and can be seen used for the Windows BitLocker.
-The TPM contains a RSA key pair of the Endorsement Key (EK) and the owner-specified password. When a user takes ownership of the TPM, a \textit{Storage Root Key} (SRK) is generated. The SRK works as the root of a tree like structure, where keys are stored and later used for encrypting data. To each TPM key a 160-bit string is associated called the \textit{authdata}, and works like a password to authorise the use of a key.
+The Trusted Platform Module (TPM) is a specialised chip storing RSA encryption keys to provide hardware-based security related functions. It is used as a component on an endpoint device and can be seen used in a lot of modern computers for the Windows BitLocker.
+The TPM contains a RSA key pair of the Endorsement Key (EK) and the owner-specified password. When a user takes ownership of the TPM, a \textit{Storage Root Key} (SRK) is generated. The SRK works as the root of a tree like structure, where keys are stored and later used for encrypting and decrypting data. To each TPM key a 160-bit string is associated called the \textit{authdata}, and works like a password to authorise the use of a key. \\
 
 \subsection{The API}
 The API offers operations related to; \textit{Secure key management and storage}, which generates new keys and impose restrictions on their use; \textit{Platform configuration registers (PCR)} which stores hashes of measurements taken by external software and later lock those by signing them with a specified key. This allows for the TPM to provide \textit{root of trust} for a variety of applications such as:
@@ -9,29 +9,31 @@ The API offers operations related to; \textit{Secure key management and storage}
 	\item \textit{Platform authentication}: where a platform can obtain keys by which it can authenticate itself reliably
 	\item \textit{Platform measurement and reporting}: where a platform can create reports of its integrity and configuration state that can be relied on by a remote verifier
 \end{itemize}
-The TPM's application program interface (API) offers a wide variety of commands, that e.g. allow the user to load new keys or certify a key by another one. As the TPM offers more than 90 different commands through its API, the report will only focus on a small sample of these. As each command has to be called inside an \textit{authorisation session}, so the user will first have to choose between one of the following sessions:
+The TPM's application program interface (API) offers a wide variety of commands, that e.g. allow the user to load new keys or certify a key by another one. As the TPM offers more than 90 different commands through its API, the report will only focus on a small sample of these. Common for all commands is that they have to be called inside an \textit{authorisation session}, so the user will first have to choose between one of the following sessions:
 \begin{itemize}
   \item Object Independent Authorisation Protocol (OIAP)
   \item Object Specific Authorisation Protocol (OSAP)
 \end{itemize}
 The OIAP creates a session that can manipulate any object, but will only work with certain commands. When setting up the session, the TPM will send back a \textit{session handle} and a fresh \textit{even nonce} as part of its arguments. 
-The OSAP creates a session that can only manipulate a specific object, specified at the session start, so when starting the session, the user will have to send with it the \textit{key handle} of the object and an \textit{odd nonce}. \\
-This rotation of nonces, with the user's defined as \textit{odd nonces (No)} and the TPM's as \textit{even nonce (Ne)}, guarantees freshness of the commands and responses, which are then encrypted with an HMAC and works as a \textit{shared secret} hmac($auth, \langle Ne^{OSAP}, No^{OSAP} \rangle $). \\ \\
+The OSAP creates a session that can only manipulate a specific object, specified at the session start, so when starting the session, the user will have to send with it the \textit{key handle} of the object and an \textit{odd nonce}.
+This rotation of nonces, with the user's defined as \textit{odd nonces (No)} and the TPM's as \textit{even nonce (Ne)}, guarantees freshness of the commands and responses, which are then encrypted with an HMAC algorithm and works as a \textit{shared secret} hmac($auth, \langle Ne^{OSAP}, No^{OSAP} \rangle $). 
 
-\subsection{OSAP and OIAP sessions}
-To illustrate the exchange of message between the TPM and a user, three commands besides the OIAP and OSAP has been chosen to get a better look at the authorisation going on:
+\subsection{Authorisation}
+To illustrate the exchange of messages between the TPM and a user, three commands besides the OIAP and OSAP has been chosen to get a better look at the authorisation going on:
 \begin{itemize}
 	\item \textit{TPM\_CreateWrapKey}: Creates a new key in the storage key tree
-	\item \textit{TPM\_LoadKey2}: Load key from tree into the TPM internal memory
-	\item \textit{TPM\_Seal}: Uses key to encrypt data and binding it to a specific PCR
+	\item \textit{TPM\_LoadKey2}: Loads a key from the tree into the TPM internal memory
+	\item \textit{TPM\_Seal}: Uses a key to encrypt data and binding it to a specific PCR value
 \end{itemize}
 The following illustration shows the message exchange of how a user starts an OSAP session (1) with the TPM to create a new key in the storage tree. The user then request an OIAP session (2) with the TPM to load the key handle of the just created key, and finishes with a third OSAP session (3) to use the key to seal some arbitrary data. The OSAP sessions are authenticated through the \textit{shared secret}, shown as \textit{S} and \textit{S'}. \\ \\
 \begin{center}
 \includegraphics{Graphics/Diagram}
 \end{center}
 \textbf{Session 1}: The user sends the request to start an OSAP session with the TPM based on a child key (called parent key \textit{pkh}) of a previous loaded key and the freshly generated odd nonce \textit{No$^{OSAP}$}. The TPM respond by sending back a new session authorisation handle \textit{ah} and two new even nonces \textit{Ne} and \textit{Ne$^{OSAP}$}. Individually the User and TPM then generate the \textit{shared secret S} derived from the \textit{pkh} and the two nonces, encrypted by a HMAC algorithm. The user can now request the TPM to create a new key by TPM\_CreateWrapKey, using the shared secret as authentication and other parameters for creating the key. The TPM checks the HMAC encryption, creates the key and sends back a \textit{keyblob} consisting of the public key and an encrypted package containing the private key and the new authdata, together with the shared secret. The session then terminates, as the shared secret has been used to create a key. \\ \\
-\textbf{Session 2}: The user request an OIAP session with the TPM, and the TPM answers by sending back an authorisation handle \textit{ah'} and a fresh odd nonce \textit{Ne''}. The user then requests to load the previously created key, by calling TPM\_LoadKey2 and providing arguments including \text{pkh}, \textit{keyblob} and a HMAC encryption of the nonces. The TPM checks the encryption, decrypts the \textit{keyblob} and loads the key into its internal memory. It send back the key handle \text{kh} and a new nonce and the HMAC encryption for authentication. The user can now use this new key handle to encrypt data by using TPM\_Seal, as seen in the next session. \\ \\
-\textbf{Session 3}: Again the User requests an OSAP session as in session 1, but this time using the key handle of the newly loaded key \textit{kh} and authdata \textit{ah''}, together with a new nonce. The \textit{shared secret S'} is generated, and the User now requests to seal some arbitrary data by the TPM\_Seal command, together with the shared secret, the key handle and a new nonce. The TPM respond after having checked the HMAC encryption, by sending back a \textit{sealedblob} containing an encrypted package of the sealed data, together with the shared secret. After this the OSAP will end, as the has been used to encrypt the data.
+\textbf{Session 2}: The user request an OIAP session with the TPM, and the TPM answers by sending back an authorisation handle \textit{ah'} and a fresh even nonce \textit{Ne''}. The user then requests to load the previously created key, by calling TPM\_LoadKey2 and providing arguments including \textit{pkh}, \textit{keyblob} and a HMAC encryption of the nonces. The TPM checks the encryption, decrypts the \textit{keyblob} and loads the key into its internal memory. It send back the key handle \textit{kh}, a new nonce and the HMAC encryption for authentication. The user can now use this new key handle to encrypt data by using TPM\_Seal, as seen in the next session. \\ \\
+\textbf{Session 3}: Again the User requests an OSAP session as in session 1, but this time uses the key handle of the newly loaded key \textit{kh} and authdata \textit{ah''}, together with a new nonce. The \textit{shared secret S'} is generated, and the User now requests to seal some arbitrary data by the TPM\_Seal command, together with the shared secret, the key handle and a new nonce. The TPM respond after having checked the HMAC encryption, by sending back a \textit{sealedblob} containing an encrypted package of the sealed data, together with the shared secret. After this the OSAP will end, as the has been used to encrypt the data. \\
+
+The next section will focus on how to combine the different fields presented, and highlight some of the problematics related to it.  
 %\input{Work_Done/TPM_Protocol} 
 
 %Examples of TPM commands with applied pi-calculus ?

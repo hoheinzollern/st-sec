@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.15)  11 DEC 2018 11:04
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.15)  11 DEC 2018 13:23
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1763,19 +1763,27 @@ File: Graphics/Proof_tree.pdf Graphic file (type pdf)
 <use Graphics/Proof_tree.pdf>
 Package pdftex.def Info: Graphics/Proof_tree.pdf used on input line 76.
 (pdftex.def)             Requested size: 230.04079pt x 105.35918pt.
-) (./Work_Done/Applied.tex [6 <./Graphics/Proof_tree.pdf>]
-Underfull \hbox (badness 10000) in paragraph at lines 13--15
+
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--38
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
+[6 <./Graphics/Proof_tree.pdf>]) (./Work_Done/Applied.tex
+Underfull \hbox (badness 10000) in paragraph at lines 13--17
 
  []
 
 [7]
-LaTeX Font Info:    Calculating math sizes for size <8.39996> on input line 49.
+Underfull \hbox (badness 10000) in paragraph at lines 31--38
 
+ []
+
+LaTeX Font Info:    Calculating math sizes for size <8.39996> on input line 49.
 
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <4.19998> not available
@@ -1794,55 +1802,57 @@ Underfull \hbox (badness 10000) in paragraph at lines 52--54
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 69--70
+[8]
+Underfull \hbox (badness 10000) in paragraph at lines 70--71
 
  []
 
-[8]
+
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Graphics/P_A.pdf): PDF inc
 lusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Graphics/P_A.pdf, id=63, 1056.94875pt x 315.1775pt>
+<Graphics/P_A.pdf, id=64, 1056.94875pt x 315.1775pt>
 File: Graphics/P_A.pdf Graphic file (type pdf)
  <use Graphics/P_A.pdf>
-Package pdftex.def Info: Graphics/P_A.pdf used on input line 73.
+Package pdftex.def Info: Graphics/P_A.pdf used on input line 74.
 (pdftex.def)             Requested size: 271.86234pt x 81.06412pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 75--76
-
- []
-
-
+[9 <./Graphics/P_A.pdf>]
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Graphics/P_B.pdf): PDF inc
 lusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Graphics/P_B.pdf, id=64, 867.24pt x 360.34625pt>
+<Graphics/P_B.pdf, id=72, 867.24pt x 360.34625pt>
 File: Graphics/P_B.pdf Graphic file (type pdf)
  <use Graphics/P_B.pdf>
-Package pdftex.def Info: Graphics/P_B.pdf used on input line 79.
+Package pdftex.def Info: Graphics/P_B.pdf used on input line 80.
 (pdftex.def)             Requested size: 230.04079pt x 95.57927pt.
 
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Graphics/P1_nspk.pdf): PDF
  inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Graphics/P1_nspk.pdf, id=65, 964.60374pt x 140.525pt>
+<Graphics/P1_nspk.pdf, id=73, 964.60374pt x 140.525pt>
 File: Graphics/P1_nspk.pdf Graphic file (type pdf)
 
 <use Graphics/P1_nspk.pdf>
-Package pdftex.def Info: Graphics/P1_nspk.pdf used on input line 84.
+Package pdftex.def Info: Graphics/P1_nspk.pdf used on input line 85.
 (pdftex.def)             Requested size: 250.95476pt x 36.55922pt.
- [9 <./Graphics/P_A.pdf> <./Graphics/P_B.pdf>]
+
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Graphics/P5_nspk.pdf): PDF
  inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Graphics/P5_nspk.pdf, id=77, 1097.09875pt x 199.74625pt>
+<Graphics/P5_nspk.pdf, id=74, 1097.09875pt x 199.74625pt>
 File: Graphics/P5_nspk.pdf Graphic file (type pdf)
 
 <use Graphics/P5_nspk.pdf>
-Package pdftex.def Info: Graphics/P5_nspk.pdf used on input line 88.
+Package pdftex.def Info: Graphics/P5_nspk.pdf used on input line 89.
 (pdftex.def)             Requested size: 250.95476pt x 45.69073pt.
-) (./Work_Done/Session_types.tex
+
+Underfull \hbox (badness 10000) in paragraph at lines 91--93
+
+ []
+
+) (./Work_Done/Session_types.tex [10 <./Graphics/P_B.pdf> <./Graphics/P1_nspk.p
+df> <./Graphics/P5_nspk.pdf>]
 Underfull \hbox (badness 10000) in paragraph at lines 7--14
 
  []
@@ -1857,49 +1867,32 @@ Underfull \hbox (badness 10000) in paragraph at lines 7--14
 
  []
 
-[10 <./Graphics/P1_nspk.pdf> <./Graphics/P5_nspk.pdf>] [11]
+
+Underfull \hbox (badness 10000) in paragraph at lines 7--14
+
+ []
+
+[11]
 
 pdfTeX warning: /Library/TeX/texbin/pdflatex (file ./Graphics/Client_ATM.pdf): 
 PDF inclusion: found PDF version <1.6>, but at most version <1.5> allowed
-<Graphics/Client_ATM.pdf, id=93, 1366.10374pt x 323.2075pt>
+<Graphics/Client_ATM.pdf, id=94, 1366.10374pt x 323.2075pt>
 File: Graphics/Client_ATM.pdf Graphic file (type pdf)
 
 <use Graphics/Client_ATM.pdf>
 Package pdftex.def Info: Graphics/Client_ATM.pdf used on input line 23.
 (pdftex.def)             Requested size: 418.25368pt x 98.95541pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--30
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--30
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 27--30
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 25--30
-
- []
-
-) (./Work_Done/TPM.tex [12 <./Graphics/Client_ATM.pdf>] [13]
-Overfull \hbox (50.02086pt too wide) in paragraph at lines 17--20
-\OT1/cmr/m/n/12 then en-cryp-ted with an HMAC and works as a \OT1/cmr/m/it/12 s
-hared secret \OT1/cmr/m/n/12 hmac($\OML/cmm/m/it/12 auth; \OMS/cmsy/m/n/12 h\OM
-L/cmm/m/it/12 Ne[]; No[]\OMS/cmsy/m/n/12 i$\OT1/cmr/m/n/12 ). 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--20
+) (./Work_Done/TPM.tex
+Underfull \hbox (badness 10000) in paragraph at lines 2--4
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--20
-
- []
-
-
+[13 <./Graphics/Client_ATM.pdf>] [14]
 Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
@@ -1909,7 +1902,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 28--29
 
  []
 
-<Graphics/Diagram.png, id=105, 451.9284pt x 434.5836pt>
+<Graphics/Diagram.png, id=109, 451.9284pt x 434.5836pt>
 File: Graphics/Diagram.png Graphic file (type png)
 
 <use Graphics/Diagram.png>
@@ -1920,17 +1913,22 @@ Overfull \hbox (33.67361pt too wide) in paragraph at lines 30--31
  [] 
  []
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 32--36
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 32--35
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 32--36
+Underfull \hbox (badness 10000) in paragraph at lines 32--35
 
  []
 
-[15 <./Graphics/Diagram.png>]) (./Work_Done/Evaluation.tex [16] [17]
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--35
+
+ []
+
+[16 <./Graphics/Diagram.png>]) (./Work_Done/Evaluation.tex [17] [18]
 Underfull \hbox (badness 10000) in paragraph at lines 25--27
 
  []
@@ -1942,7 +1940,7 @@ Overfull \hbox (19.85779pt too wide) in paragraph at lines 28--41
 
 ))
 Chapter 3.
-[18] (./Future.tex) [19
+[19] (./Future.tex) [20
 
 ] [1
 
@@ -1951,7 +1949,7 @@ Chapter 3.
 
 
 ]
-<Appendix.pdf, id=137, 597.23125pt x 845.1575pt>
+<Appendix.pdf, id=142, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
  <use Appendix.pdf>
 Package pdftex.def Info: Appendix.pdf used on input line 90.
@@ -1961,7 +1959,7 @@ File: Appendix.pdf Graphic file (type pdf)
 <use Appendix.pdf>
 Package pdftex.def Info: Appendix.pdf used on input line 90.
 (pdftex.def)             Requested size: 597.22978pt x 845.15544pt.
- <Appendix.pdf, id=140, page=1, 597.23125pt x 845.1575pt>
+ <Appendix.pdf, id=145, page=1, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
 
 <use Appendix.pdf, page 1>
@@ -1986,7 +1984,7 @@ File: Appendix.pdf Graphic file (type pdf)
 Package pdftex.def Info: Appendix.pdf, page1 used on input line 90.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
  [4 <./Appendix.pdf>]
-<Appendix.pdf, id=161, page=2, 597.23125pt x 845.1575pt>
+<Appendix.pdf, id=165, page=2, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
 
 <use Appendix.pdf, page 2>
@@ -2002,7 +2000,7 @@ File: Appendix.pdf Graphic file (type pdf)
 Package pdftex.def Info: Appendix.pdf, page2 used on input line 90.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
  [5 <./Appendix.pdf>]
-<Appendix.pdf, id=165, page=3, 597.23125pt x 845.1575pt>
+<Appendix.pdf, id=169, page=3, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
 
 <use Appendix.pdf, page 3>
@@ -2018,7 +2016,7 @@ File: Appendix.pdf Graphic file (type pdf)
 Package pdftex.def Info: Appendix.pdf, page3 used on input line 90.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
  [6 <./Appendix.pdf>]
-<Appendix.pdf, id=169, page=4, 597.23125pt x 845.1575pt>
+<Appendix.pdf, id=173, page=4, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
 
 <use Appendix.pdf, page 4>
@@ -2034,7 +2032,7 @@ File: Appendix.pdf Graphic file (type pdf)
 Package pdftex.def Info: Appendix.pdf, page4 used on input line 90.
 (pdftex.def)             Requested size: 597.25711pt x 845.19412pt.
  [7 <./Appendix.pdf>]
-<Appendix.pdf, id=173, page=5, 597.23125pt x 845.1575pt>
+<Appendix.pdf, id=177, page=5, 597.23125pt x 845.1575pt>
 File: Appendix.pdf Graphic file (type pdf)
 
 <use Appendix.pdf, page 5>
@@ -2074,16 +2072,17 @@ Here is how much of TeX's memory you used:
 usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></us
 r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
 local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/lo
-cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local
-/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/
-texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/te
-xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/tex
-live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texl
-ive/2017/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on Thesis_Prep.pdf (29 pages, 3882059 bytes).
+cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local
+/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/te
+xlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texli
+ve/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/local/texliv
+e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive
+/2017/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on Thesis_Prep.pdf (30 pages, 3891459 bytes).
 PDF statistics:
- 221 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
+ 228 PDF objects out of 1000 (max. 8388607)
+ 143 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
  98 words of extra memory for PDF output out of 10000 (max. 10000000)
 
