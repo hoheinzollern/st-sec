@@ -5,6 +5,7 @@ type ident = string
 type term =
     Var of ident
   | Func of ident * term list
+  | Tuple of term list
   | Eq of term * term
   | And of term * term
   | Or of term * term
