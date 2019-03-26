@@ -25,3 +25,17 @@ type global_type =
   | DefGlobal of ident * ident list * global_type * global_type
   | CallGlobal of ident * term list
   | GlobalEnd
+
+let rec show_term = function
+    Var(x) -> x
+  | Func(name, args) -> name ^ "(" ^ show_term_list args ^ ")"
+  | Tuple(args) -> "<" ^ show_term_list args ^ ">"
+  | Eq(t1, t2) -> show_term t1 ^ " = " ^ show_term t2
+  | And(t1, t2) -> show_term t1 ^ " & " ^ show_term t2
+  | Or(t1, t2) -> show_term t1 ^ " | " ^ show_term t2
+  | Not(t) -> "~" ^ show_term t
+
+and show_term_list = function
+    [] -> ""
+  | [x] -> show_term x
+  | (x::xs) -> show_term x ^ ", " ^ show_term_list xs
