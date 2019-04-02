@@ -51,4 +51,28 @@ and show_term_list = function
   | (x::xs) -> show_term x ^ ", " ^ show_term_list xs
 
 and show_let_bind = function
-    New(name, letb) -> "new" ^ name ^ ";" ^ letb
+    New(name, letb) -> "new" ^ name ^ ";\n" ^ show_let_bind letb
+  | Let(var, t, letb) -> "let " ^ var ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
+  | LetEnd -> ""
+
+and show_global_type = function
+  Send(p, q, opt, t, g) -> p ^ " -> " (* TODO FIX *) ^ q ^ ": " ^ show_term t ^ "\n" ^ show_global_type g
+| Branch(p, q, opt, t, branches) ->
+  p ^ " -> " (* TODO FIX *) ^ q ^ ": match " ^ show_term t ^ " with {\n" ^ show_branches branches ^ "}\n"
+| Compute(p, letb, g) ->
+  p ^ " {\n" ^ show_let_bind letb ^ "}\n" ^ show_global_type g
+| DefGlobal(name, params, g, g') ->
+  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin\n"^show_global_type g'
+| CallGlobal(name, params) ->
+  name ^ "(" ^ show_term_list params ^ ")"
+| GlobalEnd -> "end\n"
+
+and show_branches = function
+  [] -> ""
+| ((t, g)::branches) ->
+  show_term t ^ ": " ^ show_global_type g ^ "\n" ^ show_branches branches
+
+and show_id_list = function
+  [] -> ""
+| [x] -> x
+| (x::xs) -> x ^ ", " ^ show_id_list xs
