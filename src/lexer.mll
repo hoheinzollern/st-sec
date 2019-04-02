@@ -15,8 +15,7 @@ let next_line lexbuf =
 (* part 3 *)
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
-let id = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_']*
-let prin = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_']*
+let id = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_' '\'']*
 
 (* part 4 *)
 rule read =
@@ -40,7 +39,10 @@ rule read =
   | ';'      { SEMI }
   | "new"    { NEW }
   | "let"    { LET }
+  | "in"     { IN }
   | "end"    { END }
+  | "match"  { MATCH }
+  | "with"   { WITH }
   | "->"     { ARROW }
   | "*->"    { AUTH }
   | "->*"    { CONF }

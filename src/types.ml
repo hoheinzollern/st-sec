@@ -14,6 +14,13 @@ type term =
   | Or of term * term
   | Not of term
 
+(* Pattern *)
+type pattern =
+    PVar of ident
+  | PMatch of term
+  | PFunc of ident * pattern list
+  | PTuple of pattern list
+
 (* Let bindings *)
 type let_bind =
     New of ident * let_bind
@@ -26,11 +33,20 @@ type channel_options = { authentic: bool; secret: bool }
 (* Global types: p -> q *)
 type global_type =
     Send of principal * principal * channel_options * term * global_type
-  | Branch of principal * principal * channel_options * term * (term * global_type) list
+  | Branch of principal * principal * channel_options * term * (pattern * global_type) list
   | Compute of principal * let_bind * global_type
   | DefGlobal of ident * ident list * global_type * global_type
   | CallGlobal of ident * term list
   | GlobalEnd
+
+type local_type =
+    Send of principal * term * local_type
+  | Recv of principal * pattern * local_type
+  | Select of principal * (term * local_type) list
+  | Branch of principal * (pattern * local_type) list
+  | DefLocal of ident * ident list * local_type * local_type
+  | CallLocal of ident * term list * local_type
+  | LocalEnd
 
 (* 2. Should do when.. *)
 

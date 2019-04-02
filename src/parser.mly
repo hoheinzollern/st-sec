@@ -8,7 +8,7 @@
 %token COMMA DOT COLON SEMI
 %token LEFT_PAR RIGHT_PAR LEFT_ANGLE RIGHT_ANGLE LEFT_BRACE RIGHT_BRACE
 %token EQ AND OR NOT
-%token NEW LET END
+%token NEW LET IN END MATCH WITH
 %token ARROW AUTH CONF AUTHCONF
 %token EOF
 
@@ -34,6 +34,8 @@ term:
   { Or(t1, t2) }
 | NOT; t = term
   { Not(t) };
+| LEFT_PAR; t = term; RIGHT_PAR
+  { t }
 
 term_list:
 | l = separated_list(COMMA, term)
@@ -44,8 +46,7 @@ let_bind:
   { New(name, letb) }
 | LET; name = ID; EQ; t = term; SEMI; letb = let_bind
   { Let(name, t, letb) }
-| END
-  { LetEnd };
+| { LetEnd };
 
 channel_options:
 | ARROW { { authentic = false; secret = false } }
@@ -56,11 +57,11 @@ channel_options:
 global_type:
 (* P -> Q <M>.G
 Send of principal * principal * channel_options * term * global_type*)
-| prin1 = ID; chan = channel_options; prin2 = ID; LEFT_ANGLE; t = term; RIGHT_ANGLE; DOT; gt = global_type
+| prin1 = ID; chan = channel_options; prin2 = ID; COLON; t = term; DOT; gt = global_type
   { Send(prin1, prin2, chan, t, gt ) }
 (* P -> Q match M with { l : G }
 Branch of principal * principal * term * (term * global_type) list *)
-| prin1 = ID; chan = channel_options; prin2 = ID; t1 = term; LEFT_BRACE; branches = branch_list; RIGHT_BRACE
+| prin1 = ID; chan = channel_options; prin2 = ID; COLON; MATCH; t1 = term; WITH; LEFT_BRACE; branches = branch_list; RIGHT_BRACE
   { Branch(prin1, prin2, chan, t1, branches) }
 (* P { l }.G
 Compute of principal * let_bind * global_type*)
@@ -80,5 +81,5 @@ CallGlobal of ident * term list*)
 
 branch_list:
 | { [] }
-| t2 = term; COLON; gt = global_type; branches = branch_list
-  { ((t2, gt)::branches) }
+| p = pattern; COLON; gt = global_type; branches = branch_list
+  { ((p, gt)::branches) }
