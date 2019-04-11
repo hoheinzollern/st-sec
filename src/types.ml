@@ -39,6 +39,7 @@ type global_type =
   | CallGlobal of ident * term list
   | GlobalEnd
 
+(* Local Type *)
 type local_type =
     Send of principal * term * local_type
   | Recv of principal * pattern * local_type
@@ -47,6 +48,7 @@ type local_type =
   | DefLocal of ident * ident list * local_type * local_type
   | CallLocal of ident * term list * local_type
   | LocalEnd
+
 
 (* 2. Should do when.. *)
 
@@ -67,14 +69,21 @@ and show_term_list = function
   | (x::xs) -> show_term x ^ ", " ^ show_term_list xs
 
 and show_let_bind = function
-    New(name, letb) -> "new" ^ name ^ ";\n" ^ show_let_bind letb
+    New(name, letb) -> "new " ^ name ^ ";\n" ^ show_let_bind letb
   | Let(var, t, letb) -> "let " ^ var ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
   | LetEnd -> ""
 
+and show_channel_option opt =
+  match opt with
+  | { authentic = false; secret = false } -> " -> "
+  | { authentic = true; secret = false } -> " *-> "
+  | { authentic = false; secret = true } -> " ->* "
+  | { authentic = true; secret = true } -> " *->* "
+
 and show_global_type = function
-  Send(p, q, opt, t, g) -> p ^ " -> " (* TODO FIX *) ^ q ^ ": " ^ show_term t ^ "\n" ^ show_global_type g
+  Send(p, q, opt, t, g) -> p ^ show_channel_option opt ^ q ^ ": " ^ show_term t ^ "\n" ^ show_global_type g
 | Branch(p, q, opt, t, branches) ->
-  p ^ " -> " (* TODO FIX *) ^ q ^ ": match " ^ show_term t ^ " with {\n" ^ show_branches branches ^ "}\n"
+  p ^ show_channel_option opt ^ q ^ ": match " ^ show_term t ^ " with {\n" ^ show_branches branches ^ "}\n"
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}\n" ^ show_global_type g
 | DefGlobal(name, params, g, g') ->

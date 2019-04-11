@@ -24,7 +24,6 @@ rule read =
   | newline  { next_line lexbuf; read lexbuf }
 
   | ','      { COMMA }
-  | '.'      { DOT }
   | '('      { LEFT_PAR }
   | ')'      { RIGHT_PAR }
   | '{'      { LEFT_BRACE }
