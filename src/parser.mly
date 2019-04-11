@@ -44,10 +44,10 @@ term_list:
 pattern:
 | name = ID
   { PVar(name) }
-| t = term
+| EQ; t = term
   { PMatch(t) }
 (* match enc(x, k) with ... *)
-| MATCH; name = ID; WITH; pargs = pattern_list
+| name = ID; LEFT_PAR; pargs = pattern_list; RIGHT_PAR
   { PFunc(name, pargs) }
 | LEFT_ANGLE; pargs = pattern_list; RIGHT_ANGLE
   { PTuple(pargs) }
@@ -83,28 +83,7 @@ global_type:
 | END
   { GlobalEnd };
 
-local_type:
-| LEFT_ANGLE; prin = ID; COMMA; t = term; RIGHT_ANGLE; lt = local_type
-  { Send(p, t, lt) }
-| LEFT_PAR; prin = ID; COMMA; p = pattern; RIGHT_PAR; lt = local_type
-  { Recv(prin, p, lt) }
-| LEFT_ANGLE; prin = ID; COMMA; LEFT_BRACE; branches = branch_list; RIGHT_BRACE; RIGHT_ANGLE
-  { Select(prin, branches) }
-| LEFT_PAR; prin = ID; COMMA; LEFT_BRACE; branches = branch_list; RIGHT_BRACE; RIGHT_PAR
-  { Branch(prin, branches) }
- (* Let X(x) = L1 in L2 *)
-| name = ID;
-  { DefLocal(name, to_idents name_list, lt1, lt2) }
-|
-  { CallLocal(name, args, lt) }
-|
-  { LocalEnd };
-
 branch_list:
 | { [] }
 | p = pattern; COLON; gt = global_type; branches = branch_list
   { ((p, gt)::branches) };
-| t = term; COLON; lt = local_type; branches = branch_list
-  { ((t, lt)::branches) };
-| p = pattern; COLON; lt = local_type; branches = branch_list
-  { ((p, lt)::branches) };

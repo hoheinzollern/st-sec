@@ -41,13 +41,13 @@ type global_type =
 
 (* Local Type *)
 type local_type =
-    Send of principal * term * local_type
-  | Recv of principal * pattern * local_type
-  | Select of principal * (term * local_type) list
-  | Branch of principal * (pattern * local_type) list
-  | DefLocal of ident * ident list * local_type * local_type
-  | CallLocal of ident * term list * local_type
-  | LocalEnd
+    LSend of principal * term * local_type
+  | LRecv of principal * pattern * local_type
+  | LSelect of principal * (term * local_type) list
+  | LBranch of principal * (pattern * local_type) list
+  | LDefLocal of ident * ident list * local_type * local_type
+  | LCallLocal of ident * term list * local_type
+  | LLocalEnd
 
 
 (* 2. Should do when.. *)
@@ -68,14 +68,24 @@ and show_term_list = function
   | [x] -> show_term x
   | (x::xs) -> show_term x ^ ", " ^ show_term_list xs
 
+and show_pattern = function
+    PVar(x) -> x
+  | PFunc(name, args) -> name ^ "(" ^ show_pattern_list args ^ ")"
+  | PTuple(args) -> "<" ^ show_pattern_list args ^ ">"
+  | PMatch(t) -> "=" ^ show_term t
+
+and show_pattern_list = function
+    [] -> ""
+  | [x] -> show_pattern x
+  | (x::xs) -> show_pattern x ^ ", " ^ show_pattern_list xs
+
 and show_let_bind = function
     New(name, letb) -> "new " ^ name ^ ";\n" ^ show_let_bind letb
   | Let(var, t, letb) -> "let " ^ var ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
   | LetEnd -> ""
 
-and show_channel_option opt =
-  match opt with
-  | { authentic = false; secret = false } -> " -> "
+and show_channel_option = function
+    { authentic = false; secret = false } -> " -> "
   | { authentic = true; secret = false } -> " *-> "
   | { authentic = false; secret = true } -> " ->* "
   | { authentic = true; secret = true } -> " *->* "
@@ -94,8 +104,8 @@ and show_global_type = function
 
 and show_branches = function
   [] -> ""
-| ((t, g)::branches) ->
-  show_term t ^ ": " ^ show_global_type g ^ "\n" ^ show_branches branches
+| ((p, g)::branches) ->
+  show_pattern p ^ ": " ^ show_global_type g ^ "\n" ^ show_branches branches
 
 and show_id_list = function
   [] -> ""
