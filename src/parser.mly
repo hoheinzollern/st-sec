@@ -88,9 +88,9 @@ local_type:
   { Send(p, t, lt) }
 | LEFT_PAR; prin = ID; COMMA; p = pattern; RIGHT_PAR; lt = local_type
   { Recv(prin, p, lt) }
-| LEFT_ANGLE; prin = ID; COMMA; LEFT_BRACE; branches = local_branch_list; RIGHT_BRACE; RIGHT_ANGLE
+| LEFT_ANGLE; prin = ID; COMMA; LEFT_BRACE; branches = branch_list; RIGHT_BRACE; RIGHT_ANGLE
   { Select(prin, branches) }
-| LEFT_PAR; prin = ID; COMMA; LEFT_BRACE; branches = local_branch_list; RIGHT_BRACE; RIGHT_PAR
+| LEFT_PAR; prin = ID; COMMA; LEFT_BRACE; branches = branch_list; RIGHT_BRACE; RIGHT_PAR
   { Branch(prin, branches) }
  (* Let X(x) = L1 in L2 *)
 | name = ID;
@@ -104,10 +104,7 @@ branch_list:
 | { [] }
 | p = pattern; COLON; gt = global_type; branches = branch_list
   { ((p, gt)::branches) };
-
-local_branch_list:
-| { [] }
-| t = term; COLON; lt = local_type; branches = local_branch_list
+| t = term; COLON; lt = local_type; branches = branch_list
   { ((t, lt)::branches) };
-| p = pattern; COLON; lt = local_type; branches = local_branch_list
+| p = pattern; COLON; lt = local_type; branches = branch_list
   { ((p, lt)::branches) };
