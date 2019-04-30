@@ -12,10 +12,10 @@
 %token ARROW AUTH CONF AUTHCONF
 %token EOF
 
-%start <Types.global_type option> start
+%start <Types.global_type option> program
 %%
 
-start:
+program:
 | g = global_type; EOF { Some g };
 
 (* Choose? *)
@@ -44,6 +44,7 @@ term_list:
 pattern:
 | name = ID
   { PVar(name) }
+(* =term *)
 | EQ; t = term
   { PMatch(t) }
 (* match enc(x, k) with ... *)
