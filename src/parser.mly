@@ -71,8 +71,8 @@ channel_options:
 | AUTHCONF { { authentic = true; secret = true } };
 
 global_type:
-| prin1 = ID; chan = channel_options; prin2 = ID; COLON; t = term; gt = global_type
-  { Send(prin1, prin2, chan, t, gt ) }
+| prin1 = ID; chan = channel_options; prin2 = ID; COLON; x = ID; EQ; t = term; gt = global_type
+  { Send(prin1, prin2, chan, x, t, gt ) }
 | prin1 = ID; chan = channel_options; prin2 = ID; COLON; MATCH; t1 = term; WITH; LEFT_BRACE; branches = branch_list; RIGHT_BRACE
   { Branch(prin1, prin2, chan, t1, branches) }
 | prin = ID; LEFT_BRACE; lb = let_bind; RIGHT_BRACE; gt = global_type

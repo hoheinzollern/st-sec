@@ -1,6 +1,7 @@
 
 type principal = string
 type ident = string
+type env_t = (principal * ident list) list
 
 (* 1. Types *)
 
@@ -32,7 +33,7 @@ type channel_options = { authentic: bool; secret: bool }
 
 (* Global types: p -> q *)
 type global_type =
-    Send of principal * principal * channel_options * term * global_type
+    Send of principal * principal * channel_options * ident * term * global_type
   | Branch of principal * principal * channel_options * term * (pattern * global_type) list
   | Compute of principal * let_bind * global_type
   | DefGlobal of ident * ident list * global_type * global_type
@@ -91,7 +92,7 @@ and show_channel_option = function
   | { authentic = true; secret = true } -> " *->* "
 
 and show_global_type = function
-  Send(p, q, opt, t, g) -> p ^ show_channel_option opt ^ q ^ ": " ^ show_term t ^ "\n" ^ show_global_type g
+  Send(p, q, opt, x, t, g) -> p ^ show_channel_option opt ^ q ^ ": " ^ x ^ " = " ^ show_term t ^ "\n" ^ show_global_type g
 | Branch(p, q, opt, t, branches) ->
   p ^ show_channel_option opt ^ q ^ ": match " ^ show_term t ^ " with {\n" ^ show_branches branches ^ "}\n"
 | Compute(p, letb, g) ->
@@ -102,10 +103,27 @@ and show_global_type = function
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"
 
+and show_global_type_nr = function
+  Send(p, q, opt, x, t, g) -> p ^ show_channel_option opt ^ q ^ ": " ^ x ^ " = " ^ show_term t ^ " ..."
+| Branch(p, q, opt, t, branches) ->
+  p ^ show_channel_option opt ^ q ^ ": match " ^ show_term t ^ " with {\n" ^ show_branches_nr branches ^ "}\n"
+| Compute(p, letb, g) ->
+  p ^ " {\n" ^ show_let_bind letb ^ "}...\n"
+| DefGlobal(name, params, g, g') ->
+  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin...\n"
+| CallGlobal(name, params) ->
+  name ^ "(" ^ show_term_list params ^ ")"
+| GlobalEnd -> "end\n"
+
 and show_branches = function
   [] -> ""
 | ((p, g)::branches) ->
   show_pattern p ^ ": " ^ show_global_type g ^ "\n" ^ show_branches branches
+
+and show_branches_nr = function
+  [] -> ""
+| ((p, g)::branches) ->
+  show_pattern p ^ ": ...\n" ^ show_branches_nr branches
 
 and show_id_list = function
   [] -> ""
