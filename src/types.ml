@@ -1,7 +1,7 @@
 
 type principal = string
 type ident = string
-type env_t = (principal * ident list) list
+type tenv = (principal * ident list) list
 
 (* 1. Types *)
 
