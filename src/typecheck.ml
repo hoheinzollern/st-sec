@@ -98,8 +98,8 @@ begin (* done in if statement instead? *)
     check g' env' def funs
 end
 (*
-| DefGlobal(x, y list, g', g'') ->
-| CallGlobal(x, t list) ->
+| DefGlobal(x, args, g', g'') ->
+| CallGlobal(x, args) ->
 *)
 
 | GlobalEnd() -> [] (* needed? *)
