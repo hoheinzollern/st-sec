@@ -29,8 +29,8 @@ let rec check_term (env: ident list) (funs: (ident * (int * bool)) list) : term 
 
 (* Or can I just use ref to term? *)
 let rec check_pattern env funs = function
-  | PVar(x) -> if List.mem x env then []
-               else [x ^ " not defined in pattern"]
+  | PVar(x) -> if not (List.mem x env) then []
+               else [x ^ " already defined in pattern"]
   | PMatch(t) ->
       check_term env funs t
   | PFunc(f, args) ->
@@ -39,7 +39,8 @@ let rec check_pattern env funs = function
         | Some((n_args, data_fun)) ->
           if List.length args <> n_args then
           ["Wrong number of parameters in " ^ show_pattern(PFunc(f, args))]
-          else []) @ List.concat (List.map (check_pattern env funs) args)
+          else [] @
+          if not data_fun then [f ^ " is not a data function"] else []) @ List.concat (List.map (check_pattern env funs) args)
   | PTuple(l) ->
       List.concat(List.map (check_pattern env funs) l)
 
@@ -88,6 +89,9 @@ begin
     | Some(env_q) ->
       (* check pattern is well-formed, add pattern to q' env *)
       (* free variables: fv(x) = {x} *)
+      List.concat (List.map (
+        fun (p, g) -> check...
+        ) args)
 end
 | Compute(p, lb, g') ->
 begin (* done in if statement instead? *)
@@ -104,3 +108,17 @@ end
 
 | GlobalEnd() -> [] (* needed? *)
 | _ -> [] (* if nothing, return empty list of errors *)
+
+and check_branches
+  (args : (pattern * global_type) list)         (* branches *)
+  (env : tenv)                                  (* each princ. with their known var, as a list *)
+  (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type (fenv) *)
+  (funs : (ident * (int * bool)) list)          (* function name, number of args, data type *)
+  : (string * global_type) list                 (* error messages and where in code *)
+= match args with
+| [] -> []
+| ((pattern, global_type)::args') ->
+
+  check pattern g...
+
+  check_branches args' env def funs

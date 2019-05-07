@@ -46,6 +46,8 @@ type local_type =
   | LRecv of principal * pattern * local_type
   | LSelect of principal * (term * local_type) list
   | LBranch of principal * (pattern * local_type) list
+  | LNew of ident * local_type
+  | LLet of ident * term * local_type
   | LDefLocal of ident * ident list * local_type * local_type
   | LCallLocal of ident * term list * local_type
   | LLocalEnd
