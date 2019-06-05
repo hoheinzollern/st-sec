@@ -1,3 +1,4 @@
+Alice{new y; new z;}
 Alice -> TPM: x = enc(y, z)
 Alice -> TPM: match x with {
   CreateWrapKey(x_pk, ty, v_lock):
