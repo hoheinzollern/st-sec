@@ -106,7 +106,8 @@ begin
 end
 
 | DefGlobal(f, args, g', g'') ->
-  ((x, (n, bool)) :: funs) (* update funs with new function *)
+  ((f, (args, g')):: def) (* add function to def with ident, env and g *)
+
   (*(def : (ident * (tenv * global_type)) list)     function name, it's env and the global type (fenv) *)
 
 | CallGlobal(f, args) -> (* check number of args and data type *)
