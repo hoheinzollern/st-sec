@@ -15,7 +15,7 @@ let check_func f args funs =
     | None -> [f ^ " not defined"]
     | Some((n_args, data_fun)) ->
       if List.length args <> n_args then
-      ["Wrong number of parameters in " ^ f]
+      ["Wrong number of parameters in " ^ f] (* Types.show_term (Func(f,args)) instead of f *)
       else [] @
       if not data_fun then [f ^ " is not a data function"] else []
 
@@ -23,14 +23,8 @@ let rec check_term (env: ident list) (funs: (ident * (int * bool)) list) : term 
   | Var(x) -> if List.mem x env then [] (* List.mem x -> if x exists = true *)
               else [x ^ " not defined"]
   | Func(f, args) ->
-    check_func f args funs
-  (*  (match List.assoc_opt f funs with (* asooc_opt = returns the value associated with key a in the list of pairs l *)
-     | None -> [f ^ " not defined"]
-     | Some((n_args, data_fun)) ->
-       if List.length args <> n_args then (* checks if number of args match (<> not equal) *)
-       ["Wrong number of parameters in " ^ Types.show_term (Func(f,args))]
-       else []) *)
-      @ List.concat (List.map (check_term env funs) args)
+    check_func f args funs @
+    List.concat (List.map (check_term env funs) args)
   | Tuple(l) ->
       List.concat(List.map (check_term env funs) l) (* recursively checks terms with their env and funcs, concat = flattens map *)
   | Eq(t1, t2) | And(t1, t2) | Or(t1, t2) ->
@@ -45,15 +39,8 @@ let rec check_pattern env funs = function
   | PMatch(t) ->
       check_term env funs t
   | PFunc(f, args) ->
-    check_func f args funs
-    (* (match List.assoc_opt f funs with
-        | None -> [f ^ " not defined"]
-        | Some((n_args, data_fun)) ->
-          if List.length args <> n_args then
-          ["Wrong number of parameters in " ^ show_pattern(PFunc(f, args))]
-          else [] @
-          if not data_fun then [f ^ " is not a data function"] else []) *)
-          @ List.concat (List.map (check_pattern env funs) args)
+    check_func f args funs @
+    List.concat (List.map (check_pattern env funs) args)
   | PTuple(l) ->
       List.concat(List.map (check_pattern env funs) l)
 
@@ -118,11 +105,9 @@ begin
     in let_bind env_p env lb
 end
 
-(*
 | DefGlobal(f, args, g', g'') ->
   ((x, (n, bool)) :: funs) (* update funs with new function *)
   (*(def : (ident * (tenv * global_type)) list)     function name, it's env and the global type (fenv) *)
-*)
 
 | CallGlobal(f, args) -> (* check number of args and data type *)
   List.map (fun x -> (x, g)) (check_func f args funs) @
