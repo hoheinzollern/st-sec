@@ -32,7 +32,6 @@ let rec check_term (env: ident list) (funs: (ident * (int * bool)) list) : term 
   | Not(t) ->
       check_term env funs t
 
-
 let rec check_pattern env funs = function
   | PVar(x) -> if not (List.mem x env) then []
                else [x ^ " already defined in pattern"]
@@ -66,7 +65,7 @@ begin   (* does p and q exist in the env *)
       check g' env' def funs
 end
 
-(*
+
 (* TODO: recursively check pattern is well-formed, check G_i princ(add env[q] fu(pattern_i))*)
 | Branch(p, q, {authentic = a; secret = s}, t, args) -> (* args = pattern * global type *)
 begin
@@ -77,16 +76,15 @@ begin
     match List.assq_opt q env with
     | None -> ["Principal " ^ q ^ " not defined", g]
     | Some(env_q) ->
-      check_branches args env def funs
-    (*
       List.concat (List.map (
-        fun (p, g) -> ((check_pattern env_q funs p), g)   (* pattern and global type *)
-        ) args) @ *)
+        fun (p, g) -> List.map (fun e -> (e, g)) (check_pattern env_q funs p)   (* pattern and global type *)
+        ) args) @
+      check_branches args env env_q def funs
 
       (* check pattern is well-formed, add pattern to q' env *)
       (* free variables: fv(x) = {x} *)
 end
-*)
+
 
 | Compute(p, lb, g') ->
 begin
@@ -104,9 +102,9 @@ begin
       | LetEnd -> check g' env' def funs
     in let_bind env_p env lb
 end
-
-| DefGlobal(f, args, g', g'') ->
-  ((f, (args, g')):: def) (* add function to def with ident, env and g *)
+(*
+| DefGlobal(f, args, g', g'') -> []
+  ((f, (args, g')):: def)*) (* add function to def with ident, env and g *)
 
   (*(def : (ident * (tenv * global_type)) list)     function name, it's env and the global type (fenv) *)
 
@@ -117,17 +115,15 @@ end
 | GlobalEnd -> []
 | _ -> [] (* if nothing, return empty list of errors *)
 
-(*
 and check_branches
   (args : (pattern * global_type) list)         (* branches *)
   (env : tenv)                                  (* each princ. with their known var, as a list *)
+  (env_q : ident list)
   (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type (fenv) *)
   (funs : (ident * (int * bool)) list)          (* function name, number of args, data type *)
   : (string * global_type) list                 (* error messages and where in code *)
 = match args with
 | [] -> []
 | ((pattern, global_type)::args') ->
-
-    check_pattern g @
-    check_branches args' env def funs
-*)
+  check global_type env def funs @
+  check_branches args' env env_q def funs

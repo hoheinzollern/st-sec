@@ -25,7 +25,8 @@ let rec print_errors = function
 let rec parse_and_print lexbuf =
   match parse_with_error lexbuf with
   | Some g ->
-    let errors = Typecheck.check g ["Alice", []; "TPM", []] [] ["enc", (2, false); "dec", (2, false)] in
+    (* let errors = Typecheck.check g ["Alice", []; "TPM", []] [] ["enc", (2, false); "dec", (2, false)] in *)
+    let errors = Typecheck.check g ["Alice", []; "Bob", []; "Charlie", []] [] ["enc", (2, true); "dec", (2, false)] in
     print_errors errors;
     printf "%s\n" (Types.show_global_type g);
     parse_and_print lexbuf

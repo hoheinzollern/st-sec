@@ -83,7 +83,7 @@ and show_pattern_list = function
   | (x::xs) -> show_pattern x ^ ", " ^ show_pattern_list xs
 
 and show_let_bind = function
-    New(name, letb) -> "new " ^ name ^ ";\n" ^ show_let_bind letb
+    New(name, letb) -> "  " ^ "new " ^ name ^ ";\n" ^ show_let_bind letb
   | Let(var, t, letb) -> "let " ^ var ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
   | LetEnd -> ""
 

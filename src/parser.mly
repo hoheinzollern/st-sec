@@ -44,10 +44,8 @@ term_list:
 pattern:
 | name = ID
   { PVar(name) }
-(* =term *)
 | EQ; t = term
   { PMatch(t) }
-(* match enc(x, k) with ... *)
 | name = ID; LEFT_PAR; pargs = pattern_list; RIGHT_PAR
   { PFunc(name, pargs) }
 | LEFT_ANGLE; pargs = pattern_list; RIGHT_ANGLE

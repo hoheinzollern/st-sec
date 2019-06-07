@@ -12,12 +12,12 @@ let next_line lexbuf =
     }
 }
 
-(* part 3 *)
+(* part 1 *)
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 let id = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_' '\'']*
 
-(* part 4 *)
+(* part 2 *)
 rule read =
   parse
   | white    { read lexbuf } (* skip blanks *)
