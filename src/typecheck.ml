@@ -46,7 +46,7 @@ let rec check_pattern env funs = function
 let rec check
   (g : global_type)                             (* Global type *)
   (env : tenv)                                  (* each princ. with their known var, as a list *)
-  (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type (fenv) *)
+  (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type *)
   (funs : (ident * (int * bool)) list)          (* function name, number of args, data type *)
   : (string * global_type) list                 (* error messages and where in code *)
    =
@@ -102,15 +102,17 @@ begin
       | LetEnd -> check g' env' def funs
     in let_bind env_p env lb
 end
-(*
-| DefGlobal(f, args, g', g'') -> []
-  ((f, (args, g')):: def)*) (* add function to def with ident, env and g *)
-
-  (*(def : (ident * (tenv * global_type)) list)     function name, it's env and the global type (fenv) *)
+ (*
+| DefGlobal(f, args, g', g'') ->
+  let def' = ((f, (args, g'))::def) in
+  (check g' env (*env U args *) def' funs) @
+  (check g'' env def' funs)
+*)
 
 | CallGlobal(f, args) -> (* check number of args and data type *)
   List.map (fun x -> (x, g)) (check_func f args funs) @
   check g env def funs
+  (* check fv(t1) is a subset of the env of p *)
 
 | GlobalEnd -> []
 | _ -> [] (* if nothing, return empty list of errors *)
