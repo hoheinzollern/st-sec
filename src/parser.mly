@@ -5,18 +5,31 @@
   | (Var x::xs) -> x::to_idents xs
 %}
 %token <string> ID
+%token <int> NUM
 %token COMMA COLON SEMI
 %token LEFT_PAR RIGHT_PAR LEFT_ANGLE RIGHT_ANGLE LEFT_BRACE RIGHT_BRACE
-%token EQ AND OR NOT
-%token NEW LET IN END MATCH WITH
-%token ARROW AUTH CONF AUTHCONF
+%token EQ AND OR NOT DIV
+%token NEW LET IN END MATCH WITH DATA PROBLEM PRINCIPALS FUNCTIONS EQUATIONS PROTOCOL
+%token AT ARROW AUTH CONF AUTHCONF
 %token EOF
 
-%start <Types.global_type option> program
+%start <Types.problem option> program
 %%
 
 program:
-| g = global_type; EOF { Some g };
+| PROBLEM; COLON; n = ID; SEMI;
+  PRINCIPALS; COLON; p = separated_list(COMMA, ID); SEMI;
+  FUNCTIONS; COLON; f = separated_list(COMMA, fundef); SEMI;
+  EQUATIONS; COLON; e = separated_list(COMMA, eqdef); SEMI;
+  PROTOCOL; COLON; g = global_type; EOF
+{ Some { name = n; principals = p; functions = f; equations = e; protocol = g } };
+
+fundef:
+| f = ID; DIV; arity = NUM; LEFT_BRACE; DATA; RIGHT_BRACE { (f, (arity, true)) }
+| f = ID; DIV; arity = NUM { (f, (arity, false)) }
+
+eqdef:
+| lhs = term; EQ; rhs = term { (lhs, rhs) }
 
 (* Choose? *)
 term:
@@ -75,12 +88,15 @@ global_type:
   { Branch(prin1, prin2, chan, t1, branches) }
 | prin = ID; LEFT_BRACE; lb = let_bind; RIGHT_BRACE; gt = global_type
   { Compute(prin, lb, gt) }
-| LET; name = ID; LEFT_PAR; name_list = term_list; RIGHT_PAR; EQ; gt1 = global_type; IN; gt2 = global_type
-  { DefGlobal(name, to_idents name_list, gt1, gt2) }
+| LET; name = ID; LEFT_PAR; params = separated_list(COMMA, param); RIGHT_PAR; EQ; gt1 = global_type; IN; gt2 = global_type
+  { DefGlobal(name, params, gt1, gt2) }
 | name = ID; LEFT_PAR; args = term_list; RIGHT_PAR
   { CallGlobal(name, args) }
 | END
   { GlobalEnd };
+
+param:
+| x = ID; AT; p = ID { (x, p) }
 
 branch_list:
 | { [] }

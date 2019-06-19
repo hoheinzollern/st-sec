@@ -1,10 +1,13 @@
+Problem: TPM;
 Principals: TPM, Alice, KeyStore;
+Functions: enc/2, dec/2;
+Equations: dec(enc(x,y),y) = x;
 
 Protocol:
 
 let TPMProto(v_pcr @ TPM, id_tpm @ TPM, tpm_proof @ TPM) =
 
-  Alice -> TPM: {
+  Alice -> TPM: _ @ {
     CreateWrapKey(x_pk, ty, v_lock):
       TPM { new key; }
       KeyStore o->* TPM: <x_id_tpm, x_sk, x_pk', ty', v_pcr'>;

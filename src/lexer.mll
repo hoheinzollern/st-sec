@@ -16,6 +16,7 @@ let next_line lexbuf =
 let white = [' ' '\t']+
 let newline = '\r' | '\n' | "\r\n"
 let id = ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '0'-'9' '_' '\'']*
+let num = ['0'-'9']+
 
 (* part 2 *)
 rule read =
@@ -34,19 +35,28 @@ rule read =
   | '&'      { AND }
   | '|'      { OR }
   | '~'      { NOT }
+  | '/'      { DIV }
   | ':'      { COLON }
   | ';'      { SEMI }
+  | '@'      { AT }
   | "new"    { NEW }
   | "let"    { LET }
   | "in"     { IN }
   | "end"    { END }
   | "match"  { MATCH }
   | "with"   { WITH }
+  | "data"   { DATA }
+  | "Problem" { PROBLEM }
+  | "Principals" { PRINCIPALS }
+  | "Functions" { FUNCTIONS }
+  | "Equations" { EQUATIONS }
+  | "Protocol" { PROTOCOL }
   | "->"     { ARROW }
   | "*->"    { AUTH }
   | "->*"    { CONF }
   | "*->*"   { AUTHCONF }
 
   | id       { let s = Lexing.lexeme lexbuf in ID(s) }
+  | num      { let s = Lexing.lexeme lexbuf in NUM(int_of_string s) }
   | _ { raise (SyntaxError ("Unexpected char: " ^ Lexing.lexeme lexbuf)) }
   | eof      { EOF }

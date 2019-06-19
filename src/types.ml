@@ -2,7 +2,6 @@
 type principal = string
 type ident = string
 type tenv = (principal * ident list) list
-
 (* 1. Types *)
 
 (* Terms *)
@@ -36,7 +35,7 @@ type global_type =
     Send of principal * principal * channel_options * ident * term * global_type
   | Branch of principal * principal * channel_options * term * (pattern * global_type) list
   | Compute of principal * let_bind * global_type
-  | DefGlobal of ident * ident list * global_type * global_type
+  | DefGlobal of ident * (ident * principal) list * global_type * global_type
   | CallGlobal of ident * term list
   | GlobalEnd
 
@@ -52,6 +51,11 @@ type local_type =
   | LCallLocal of ident * term list * local_type
   | LLocalEnd
 
+type problem = { name: ident;
+                 principals: principal list;
+                 functions: (ident * (int * bool)) list;
+                 equations: (term * term) list;
+                 protocol: global_type }
 
 (* 2. Should do when.. *)
 
@@ -100,7 +104,7 @@ and show_global_type = function
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}\n" ^ show_global_type g
 | DefGlobal(name, params, g, g') ->
-  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin\n"^show_global_type g'
+  name ^ "("^show_params params^")" ^ show_global_type g ^ "\nin\n"^show_global_type g'
 | CallGlobal(name, params) ->
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"
@@ -112,7 +116,7 @@ and show_global_type_nr = function
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}...\n"
 | DefGlobal(name, params, g, g') ->
-  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin...\n"
+  name ^ "("^show_params params^")" ^ show_global_type g ^ "\nin...\n"
 | CallGlobal(name, params) ->
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"
@@ -127,7 +131,7 @@ and show_branches_nr = function
 | ((p, g)::branches) ->
   show_pattern p ^ ": ...\n" ^ show_branches_nr branches
 
-and show_id_list = function
+and show_params = function
   [] -> ""
-| [x] -> x
-| (x::xs) -> x ^ ", " ^ show_id_list xs
+| [(x, p)] -> x ^ " @ " ^ p
+| ((x, p)::xs) -> x ^ " @ " ^ p ^ ", " ^ show_params xs
