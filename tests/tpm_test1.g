@@ -8,7 +8,7 @@ Alice -> TPM: match x with {
       x_id_tpm = id_tpm & x_pk = x_pk' & (v_pcr' = nil | v_pcr = v_pcr'),
       <pk(key), wrap(x_pk, key, ty, tpm_proof, v_lock)>,
       fail
-    ); }
+    ) in }
     TPM -> Alice: x = <msg>
     TPMProto(v_pcr, id_tpm, tpm_proof)
 }

@@ -36,7 +36,7 @@ type global_type =
     Send of principal * principal * channel_options * ident * term * global_type
   | Branch of principal * principal * channel_options * term * (pattern * global_type) list
   | Compute of principal * let_bind * global_type
-  | DefGlobal of ident * ident list * global_type * global_type
+  | DefGlobal of ident * (principal * ident list) list * global_type * global_type
   | CallGlobal of ident * term list
   | GlobalEnd
 
@@ -100,7 +100,7 @@ and show_global_type = function
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}\n" ^ show_global_type g
 | DefGlobal(name, params, g, g') ->
-  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin\n"^show_global_type g'
+  name ^ "("^show_id_list params^")" ^ " = " ^ show_global_type g ^ "\nin\n"^show_global_type g'
 | CallGlobal(name, params) ->
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"
@@ -112,7 +112,7 @@ and show_global_type_nr = function
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}...\n"
 | DefGlobal(name, params, g, g') ->
-  name ^ "("^show_id_list params^")" ^ show_global_type g ^ "\nin...\n"
+  name ^ "("^show_id_list params^")" ^ " = " ^ show_global_type g ^ "\nin...\n"
 | CallGlobal(name, params) ->
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"
@@ -127,7 +127,12 @@ and show_branches_nr = function
 | ((p, g)::branches) ->
   show_pattern p ^ ": ...\n" ^ show_branches_nr branches
 
+and show_id = function
+    [] -> ""
+  | [x] -> x
+  | (x::xs) -> x ^ ", " ^ show_id xs
+
 and show_id_list = function
   [] -> ""
-| [x] -> x
-| (x::xs) -> x ^ ", " ^ show_id_list xs
+| [p, t] -> p ^ ": " ^ show_id t
+| ((p, t)::params) -> p ^ ": " ^ show_id t ^ "; " ^ show_id_list params

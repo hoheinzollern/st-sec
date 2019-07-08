@@ -1,8 +1,5 @@
 %{
   open Types
-  let rec to_idents = function
-    [] -> []
-  | (Var x::xs) -> x::to_idents xs
 %}
 %token <string> ID
 %token COMMA COLON SEMI
@@ -75,9 +72,9 @@ global_type:
   { Branch(prin1, prin2, chan, t1, branches) }
 | prin = ID; LEFT_BRACE; lb = let_bind; RIGHT_BRACE; gt = global_type
   { Compute(prin, lb, gt) }
-| LET; name = ID; LEFT_PAR; name_list = term_list; RIGHT_PAR; EQ; gt1 = global_type; IN; gt2 = global_type
-  { DefGlobal(name, to_idents name_list, gt1, gt2) }
-| name = ID; LEFT_PAR; args = term_list; RIGHT_PAR
+| LET; name = ID; LEFT_PAR; name_list = param_list; RIGHT_PAR; EQ; gt1 = global_type; IN; gt2 = global_type
+  { DefGlobal(name, name_list, gt1, gt2) }
+| name = ID; LEFT_PAR; args = term_list; RIGHT_PAR;
   { CallGlobal(name, args) }
 | END
   { GlobalEnd };
@@ -86,3 +83,11 @@ branch_list:
 | { [] }
 | p = pattern; COLON; gt = global_type; branches = branch_list
   { ((p, gt)::branches) };
+
+param_list:
+  l = separated_list(SEMI, arg_list)
+    { l };
+
+arg_list:
+  prin = ID; COLON; x = separated_list(COMMA, ID)
+    { (prin, x) };
