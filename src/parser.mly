@@ -68,8 +68,8 @@ pattern_list:
 let_bind:
 | NEW; name = ID; SEMI; letb = let_bind
   { New(name, letb) }
-| LET; name = ID; EQ; t = term; SEMI; letb = let_bind
-  { Let(name, t, letb) }
+| LET; p = pattern; EQ; t = term; SEMI; letb = let_bind
+  { Let(p, t, letb) }
 | { LetEnd };
 
 channel_options:
@@ -79,6 +79,8 @@ channel_options:
 | AUTHCONF { { authentic = true; secret = true } };
 
 global_type:
+| prin1 = ID; chan = channel_options; prin2 = ID; COLON; p = pattern; gt = global_type
+  { Branch(prin1, prin2, chan, pattern_to_term p, [p, gt]) }
 | prin1 = ID; chan = channel_options; prin2 = ID; COLON; x = ID; EQ; t = term; gt = global_type
   { Send(prin1, prin2, chan, x, t, gt ) }
 | prin1 = ID; chan = channel_options; prin2 = ID; COLON; MATCH; t1 = term; WITH; LEFT_BRACE; branches = branch_list; RIGHT_BRACE

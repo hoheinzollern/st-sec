@@ -109,9 +109,10 @@ begin
       | New(x, lb) ->
         let env_p' = (x::env_p) in
         let_bind env_p' (update p env_p' env) lb
-      | Let(x, t, lb) ->
+      | Let(pat, t, lb) ->
         List.map (fun e -> (e, g)) (check_term env_p funs t) @
-        let env_p' = (x::env_p) in
+        List.map (fun e -> (e, g)) (check_pattern env_p funs pat) @
+        let env_p' = binds pat @ env_p in
         let_bind env_p' (update p env_p' env) lb
       | LetEnd -> check g' env def funs
     in let_bind env_p env lb

@@ -21,11 +21,22 @@ type pattern =
   | PFunc of ident * pattern list
   | PTuple of pattern list
 
+let rec pattern_to_term = function
+    PVar x -> Var x
+  | PMatch t -> t
+  | PFunc(f, args) -> Func(f, List.map pattern_to_term args)
+  | PTuple args -> Tuple(List.map pattern_to_term args)
+
 (* Let bindings *)
 type let_bind =
     New of ident * let_bind
-  | Let of ident * term * let_bind
+  | Let of pattern * term * let_bind
   | LetEnd
+
+let rec binds = function
+    PVar x -> [x]
+  | PMatch t -> []
+  | PFunc(_, args) | PTuple args -> List.concat (List.map binds args)
 
 (* Channel options / Bullet notation *)
 type channel_options = { authentic: bool; secret: bool }
@@ -88,7 +99,7 @@ and show_pattern_list = function
 
 and show_let_bind = function
     New(name, letb) -> "  " ^ "new " ^ name ^ ";\n" ^ show_let_bind letb
-  | Let(var, t, letb) -> "let " ^ var ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
+  | Let(p, t, letb) -> "let " ^ show_pattern p ^ " = " ^ show_term t ^ " in\n" ^ show_let_bind letb
   | LetEnd -> ""
 
 and show_channel_option = function

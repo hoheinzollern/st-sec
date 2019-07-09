@@ -7,39 +7,39 @@ Protocol:
 
 let TPMProto(v_pcr @ TPM, id_tpm @ TPM, tpm_proof @ TPM) =
 
-  Alice -> TPM: _ @ {
+  Alice -> TPM: match x with {
     CreateWrapKey(x_pk, ty, v_lock):
       TPM { new key; }
-      KeyStore o->* TPM: <x_id_tpm, x_sk, x_pk', ty', v_pcr'>;
+      KeyStore ->* TPM: <x_id_tpm, x_sk, x_pk', ty', v_pcr'>
       TPM { let msg = IfThenElse(
-        x_id_tpm = id_tpm && x_pk = x_pk' && (v_pcr' = nil || v_pcr = v_pcr'),
+        x_id_tpm = id_tpm & x_pk = x_pk' & (v_pcr' = nil | v_pcr = v_pcr'),
         <pk(key), wrap(x_pk, key, ty, tpm_proof, v_lock)>,
         fail
       ); }
-      TPM -> Alice: <msg>;
+      TPM -> Alice: <msg>
       TPMProto(v_pcr, id_tpm, tpm_proof)
 
-    Seal(data, x_pcr, x_pk):
-      KeyStore o->* TPM: <x_id_tpm, x_sk, x_pk', ty, v_pcr'>;
+    Seal(d, x_pcr, x_pk):
+      KeyStore ->* TPM: <x_id_tpm, x_sk, x_pk', ty, v_pcr'>
       TPM { let msg = IfThenElse(
-        x_id_tpm = id_tpm && x_pk' = x_pk && ty = sealk &&
-          (v_pcr' = nil || v_pcr = v_pcr'),
-        seal(x_pk, data, tpm_proof, x_pcr),
+        x_id_tpm = id_tpm & x_pk' = x_pk & ty = sealk &
+          (v_pcr' = nil | v_pcr = v_pcr'),
+        seal(x_pk, d, tpm_proof, x_pcr),
         fail
       ); }
-      TPM -> Alice: <msg>;
+      TPM -> Alice: <msg>
       TPMProto(v_pcr, id_tpm, tpm_proof)
 
     Unseal(x):
-      TPM { let <x_pk, data, tpm_proof', v_pcr'> = unseal(x); }
-      KeyStore o->* TPM: <x_id_tpm, x_sk, x_pk', ty, v_pcr''>;
+      TPM { let <x_pk, d, tpm_proof', v_pcr'> = unseal(x); }
+      KeyStore ->* TPM: <x_id_tpm, x_sk, x_pk', ty, v_pcr''>
       TPM { let msg = IfThenElse(
-        x_id_tpm = id_tpm && x_pk' = x_pk && ty = sealk &&
-          ((v_pcr' = nil && v_pcr'' = nil) || (v_pcr' = nil && v_pcr = v_pcr'') || (v_pcr' = v_pcr && v_pcr'' = nil) || (v_pcr' = v_pcr && v_pcr'' = v_pcr)),
-        data,
+        x_id_tpm = id_tpm & x_pk' = x_pk & ty = sealk &
+          ((v_pcr' = nil & v_pcr'' = nil) | (v_pcr' = nil & v_pcr = v_pcr'') | (v_pcr' = v_pcr & v_pcr'' = nil) | (v_pcr' = v_pcr & v_pcr'' = v_pcr)),
+        d,
         fail
       ); }
-      TPM -> Alice: <msg>;
+      TPM -> Alice: <msg>
       TPMProto(v_pcr, id_tpm, tpm_proof)
 
     Extend(x):
