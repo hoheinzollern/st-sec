@@ -15,20 +15,14 @@ type resultOrError =
     Result of tenv
   | Error of string list
 
-(* Unions params and env *)
-(* remove duplicates ?? *)
-let union_env x y : resultOrError =
-  let sort_list = List.sort compare in
-  let rec help_union xs ys (acc:tenv) =
-    match xs, ys with
-      | [], [] -> Result (acc)
-      | [], (p, x)::xs -> Error (["Principal " ^ p ^ " not defined"])
-      | xs, [] -> Result ( acc @ xs )
-      | (p, x)::xs, ((p', y)::ys as param') ->
-        if p = p' then help_union xs ys ((p, x@y)::acc)
-        else if p > p' then Error (["Principal " ^ p' ^ " not defined"])
-          else help_union xs param' ((p,x)::acc)
-    in help_union (List.sort compare x) (sort_list y) []
+let rec add_params_to_env env = function
+    [] -> Result env
+  | (x, p)::params ->
+    begin
+      match List.assoc_opt p env with
+      | Some p_env -> add_params_to_env (update p (x::p_env) env) params
+      | None -> Error(["Principal " ^ p ^ " not defined"])
+    end
 
 (* Checks if function: exist, right number of args, if data func, return list of errors *)
 let check_func f args funs =
@@ -70,7 +64,7 @@ let rec check_pattern env funs = function
 let rec check
   (g : global_type)                             (* Global type *)
   (env : tenv)                                  (* each princ. with their known var, as a list *)
-  (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type *)
+  (def : (ident * ((ident * principal) list * global_type)) list)   (* function name, it's env and the global type *)
   (funs : (ident * (int * bool)) list)          (* function name, number of args, data type *)
   : (string * global_type) list                 (* error messages and where in code *)
    =
@@ -101,11 +95,8 @@ begin
     | None -> ["Principal " ^ q ^ " not defined", g]
     | Some(env_q) ->
       List.concat (List.map (
-        fun (p, g) -> List.map (fun e -> (e, g)) (check_pattern env_q funs p)   (* pattern and global type *)
-        ) args) @
-      List.concat (List.map (
-        fun (p, g) -> check g env def funs) args)
-        (*check_branches args env env_q def funs*)
+        fun (p, g) -> check g env def funs @ List.map (fun e -> (e, g)) (check_pattern env_q funs p)   (* pattern and global type *)
+        ) args)
 end
 
 (* Checks let-binding: update env of participant *)
@@ -129,7 +120,7 @@ end
 (* Checks function definition: *)
 | DefGlobal(f, params, g', g'') ->
   let def' = ((f, (params, g'))::def) in
-  let env' = union_env env params in
+  let env' = add_params_to_env env params in
   begin
     match env' with
       | Error(err) -> List.map (fun e -> (e, g)) err
@@ -142,28 +133,18 @@ end
   begin
     match List.assoc_opt f def with
       | None -> ["Funcion " ^ f ^ " not declared in ", g]
-      | Some((p', env_p)::xs, g) -> (* (princ, ident list) list, g *)
-        List.concat ((List.map (fun e -> (e, g)) (check_term env_p funs)) args)
+      | Some(params, g) ->
+        if List.length args <> List.length params then
+          ["Arguments and parameter lengths do not match in ", g]
+        else
+          List.map (fun e -> (e, g)) (List.concat (List.map (fun (t, (x, p)) -> check_term (List.assoc p env) funs t) (List.combine args params)))
   end
   (* (princ * ident list) list, g *)
-
+(*
 
   List.map (fun e -> (e, g)) (check_func f args funs) @
   check g env def funs
-  (* check fv(t1) is a subset of the env of p *)
+  (* check fv(t1) is a subset of the env of p *) *)
 
 | GlobalEnd -> []
 (*| _ -> [] *)
-
-and check_branches
-  (args : (pattern * global_type) list)         (* branches *)
-  (env : tenv)                                  (* each princ. with their known var, as a list *)
-  (env_q : ident list)                          (* env of q *)
-  (def : (ident * (tenv * global_type)) list)   (* function name, it's env and the global type (fenv) *)
-  (funs : (ident * (int * bool)) list)          (* function name, number of args, data type *)
-  : (string * global_type) list                 (* error messages and where in code *)
-= match args with
-| [] -> []
-| ((pattern, global_type)::args') ->
-  check global_type env def funs @
-  check_branches args' env env_q def funs
