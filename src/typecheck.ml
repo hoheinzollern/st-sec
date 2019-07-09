@@ -13,52 +13,22 @@ let rec update x y = function
 
 type resultOrError =
     Result of tenv
-  | Error of (string * global_type) list
+  | Error of string list
 
-(* env, param *)
-(* Error messages suppose to be return of check, and not in env *)
+(* Unions params and env *)
 (* remove duplicates ?? *)
-let union_env x y g : resultOrError =
+let union_env x y : resultOrError =
   let sort_list = List.sort compare in
-  let rec help_union xs ys (a:tenv) =
+  let rec help_union xs ys (acc:tenv) =
     match xs, ys with
-      | [], [] -> Result (a)
-      | [], (p, x)::xs -> Error (["Principal " ^ p ^ " not defined", g])
-      | xs, [] -> Result ( a @ xs )
+      | [], [] -> Result (acc)
+      | [], (p, x)::xs -> Error (["Principal " ^ p ^ " not defined"])
+      | xs, [] -> Result ( acc @ xs )
       | (p, x)::xs, ((p', y)::ys as param') ->
-        if p = p' then help_union xs ys ((p, x@y)::a)
-        else if p > p' then Error (["Principal " ^ p' ^ " not defined", g])
-          else help_union xs param' ((p,x)::a)
+        if p = p' then help_union xs ys ((p, x@y)::acc)
+        else if p > p' then Error (["Principal " ^ p' ^ " not defined"])
+          else help_union xs param' ((p,x)::acc)
     in help_union (List.sort compare x) (sort_list y) []
-(*
-let union_env x y : (string * a' list) list =
-  let sort_list l =
-    List.sort compare l in
-  let rec help_union xs ys =
-    match xs, ys with
-      | [], [] -> []
-      | [], (p, x)::xs -> ["Principal " ^ p ^ " not defined", []]
-      | xs, [] -> xs
-      | (p, x)::xs, ((p', y)::ys as param') ->
-        if p = p' then (p, x@y)::help_union xs ys
-        else if p > p' then ["Principal " ^ p' ^ " not defined", []]
-          else (p, x)::help_union xs param')
-    in help_union (sort_list x) (sort_list y)
-*)
-(*
-let rec test xs ys =
-  match xs, ys with
-  | [], [] -> []
-  | [], ys -> ys
-  | xs, [] -> xs
-  | (a, b)::xs, (c, d)::ys ->
-    test xs ys ;;
-
-let num = [("a", "y"); ("t", "a"); ("b", "b"); ("c", "e")]
-let num = [("a", [4; 2]); ("d", [3]); ("b", [2; 4]); ("c", [2; 2; 5])]
-let nums = [("a", [4; 2]); ("d", [3]); ("b", [2; 4]); ("c", [2; 2; 5])]
-List.sort compare num;; nums;;
-*)
 
 (* Checks if function: exist, right number of args, if data func, return list of errors *)
 let check_func f args funs =
@@ -96,12 +66,6 @@ let rec check_pattern env funs = function
   | PTuple(l) ->
       List.concat(List.map (check_pattern env funs) l)
 
-(* return env_p *)
-(*let check_princ p env =
-  match List.assoc_opt p env with
-   | None -> ["Princepal " ^ p ^ " not defined", g]
-   | Some(env_p) -> *)
-
 (* Checks global types, return list of errors *)
 let rec check
   (g : global_type)                             (* Global type *)
@@ -127,7 +91,7 @@ begin
 end
 
 (* checks branch: if p and q exist, if t is well-formed, recursively check patterns *)
-| Branch(p, q, {authentic = a; secret = s}, t, args) -> (* args: pattern * global type *)
+| Branch(p, q, {authentic = a; secret = s}, t, args) ->
 begin
   match List.assoc_opt p env with
   | None -> ["Princepal " ^ p ^ " not defined", g]
@@ -165,22 +129,25 @@ end
 (* Checks function definition: *)
 | DefGlobal(f, params, g', g'') ->
   let def' = ((f, (params, g'))::def) in
-  let env' = union_env env params g in
+  let env' = union_env env params in
   begin
     match env' with
-      | Error(err) -> err
-      | Result(env) -> (check g' env def' funs) @
+      | Error(err) -> List.map (fun e -> (e, g)) err
+      | Result(env_param) -> (check g' env_param def' funs) @ (* obs recursion on def' *)
                        (check g'' env def' funs)
   end
 
-
-    (* env' = update q (x::env_q) env *)
-(* check if princ exists? *)
-  (* def: (ident * (env * global_type)) list)
-  env: (princ * ident list) list *)
-
-(* Checks function call: exists, number of args, if datatype*)
+(* Checks function calls *)
 | CallGlobal(f, args) ->
+  begin
+    match List.assoc_opt f def with
+      | None -> ["Funcion " ^ f ^ " not declared in ", g]
+      | Some((p', env_p)::xs, g) -> (* (princ, ident list) list, g *)
+        List.concat ((List.map (fun e -> (e, g)) (check_term env_p funs)) args)
+  end
+  (* (princ * ident list) list, g *)
+
+
   List.map (fun e -> (e, g)) (check_func f args funs) @
   check g env def funs
   (* check fv(t1) is a subset of the env of p *)

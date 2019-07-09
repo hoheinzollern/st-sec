@@ -1,3 +1,3 @@
-let F(Alice: x, a; Bob: y) = 
+let F(Alice: x, a; Boba: y) = 
   end in 
   end

@@ -100,7 +100,7 @@ and show_global_type = function
 | Compute(p, letb, g) ->
   p ^ " {\n" ^ show_let_bind letb ^ "}\n" ^ show_global_type g
 | DefGlobal(name, params, g, g') ->
-  name ^ "("^show_id_list params^")" ^ " = " ^ show_global_type g ^ "\nin\n"^show_global_type g'
+  "Def " ^ name ^ "("^show_id_list params^")" ^ " = " ^ show_global_type g ^ "\nin\n"^show_global_type g'
 | CallGlobal(name, params) ->
   name ^ "(" ^ show_term_list params ^ ")"
 | GlobalEnd -> "end\n"

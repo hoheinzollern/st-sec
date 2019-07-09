@@ -55,7 +55,7 @@ pattern_list:
 let_bind:
 | NEW; name = ID; SEMI; letb = let_bind
   { New(name, letb) }
-| LET; name = ID; EQ; t = term; IN; letb = let_bind
+| LET; name = ID; EQ; t = term; SEMI; letb = let_bind
   { Let(name, t, letb) }
 | { LetEnd };
 
