@@ -50,8 +50,7 @@ let TPMProto(v_pcr @ TPM, id_tpm @ TPM, tpm_proof @ TPM) =
 in
 
 let TPMInit() =
-  TPM { new....; }
-  TPM *->o KeyStore: <x_id_tpm, x_sk, x_pk', ty, v_pcr'>;
+  TPM *-> KeyStore: <x_id_tpm, x_sk, x_pk', ty, v_pcr'>
   TPMProto(init_pcr, id_tpm, tpm_proof)
 
 in TPMInit()

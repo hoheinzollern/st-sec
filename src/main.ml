@@ -22,15 +22,14 @@ let rec print_errors = function
     print_errors err
   | [] -> ()
 
-let rec parse_and_print lexbuf =
+let parse_and_print lexbuf =
   match parse_with_error lexbuf with
   | Some { principals = p; protocol = g } ->
      (* let errors = Typecheck.check g ["Alice", []; "TPM", []] [] ["enc", (2, false); "dec", (2, false)] in *)
     let env = List.map (fun x -> x, []) p in
     let errors = Typecheck.check g env [] ["enc", (2, true); "dec", (2, false)] in
     print_errors errors;
-    printf "%s\n" (Types.show_global_type g);
-    parse_and_print lexbuf
+    printf "%s\n" (Types.show_global_type g)
   | None -> ()
 
 let loop filename () =
