@@ -1,7 +1,8 @@
 open Lexer
 open Lexing
 open Printf
-
+open Translation
+   
 let print_position outx lexbuf =
   let pos = lexbuf.lex_curr_p in
   fprintf outx "%s:%d:%d" pos.pos_fname
@@ -24,12 +25,14 @@ let rec print_errors = function
 
 let parse_and_print lexbuf =
   match parse_with_error lexbuf with
-  | Some { principals = p; protocol = g } ->
+  | Some { principals = p; protocol = g; functions = f } ->
      (* let errors = Typecheck.check g ["Alice", []; "TPM", []] [] ["enc", (2, false); "dec", (2, false)] in *)
     let env = List.map (fun x -> x, []) p in
-    let errors = Typecheck.check g env [] ["enc", (2, true); "dec", (2, false)] in
+    let errors = Typecheck.check g env [] f in
+    let rules = tr g "NS" 0 ["Alice", Rule([], [], [], []); "Bob", Rule([], [], [], [])] ["Alice", []; "Bob", []] in
     print_errors errors;
-    printf "%s\n" (Types.show_global_type g)
+    printf "%s\n" (Types.show_global_type g);
+    printf "%s\n" (Types.show_rules rules)
   | None -> ()
 
 let loop filename () =

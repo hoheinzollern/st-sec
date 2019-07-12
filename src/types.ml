@@ -27,10 +27,13 @@ let rec pattern_to_term = function
   | PFunc(f, args) -> Func(f, List.map pattern_to_term args)
   | PTuple args -> Tuple(List.map pattern_to_term args)
 
+let id_to_var = List.map (fun x -> Var x)
+
 (* Let bindings *)
 type let_bind =
     New of ident * let_bind
   | Let of pattern * term * let_bind
+  | Event of ident * term list * let_bind
   | LetEnd
 
 let rec binds = function
@@ -67,6 +70,10 @@ type problem = { name: ident;
                  functions: (ident * (int * bool)) list;
                  equations: (term * term) list;
                  protocol: global_type }
+
+type fact = Fact of ident * term list
+type letb = LetB of pattern * term
+type msr_rule = Rule of letb list * fact list * fact list * fact list
 
 (* 2. Should do when.. *)
 
@@ -146,3 +153,30 @@ and show_params = function
   [] -> ""
 | [(x, p)] -> x ^ " @ " ^ p
 | ((x, p)::xs) -> x ^ " @ " ^ p ^ ", " ^ show_params xs
+
+let show_fact (Fact(f, args)) = f ^"("^show_term_list args^")"
+let rec show_facts = function
+    [] -> ""
+  | [f] -> show_fact f
+  | f::fs -> show_fact f^", "^show_facts fs
+
+let show_rule (Rule(letb, l, e, r)) =
+  let rec show_letb = function
+      [] -> ""
+    | LetB(pat, t)::letb' -> show_term (pattern_to_term pat) ^" = "^ show_term t ^"\n"^show_letb letb' in
+  (if letb = [] then "" else "let " ^ show_letb letb ^ " in\n")^" [" ^ show_facts l ^"] --["^ show_facts e^"]-> ["^ show_facts r^"]\n"
+
+let rec show_rules = function
+    [] -> ""
+  | [r] -> show_rule r
+  | r::rs -> show_rule r ^"\n\n"^show_rules rs
+
+exception Lookup_failure
+
+(* Update list of pair with x and y, returns updated env *)
+let rec update x y = function
+  | (x', y')::l ->             (* a::[b,c] = [a,b,c] add item to the beginning of a list *)
+    if x = x' then (x, y)::l
+    else (x', y')::update x y l
+  | _ -> raise Lookup_failure;;
+  (* env' = update q (x::env_q) env *)

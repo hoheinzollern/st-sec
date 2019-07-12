@@ -1,15 +1,6 @@
 (* https://github.com/SOwens/example-compiler  - guide in compilers in OCaml *)
 
-exception Lookup_failure
 open Types
-
-(* Update list of pair with x and y, returns updated env *)
-let rec update x y = function
-  | (x', y')::l ->             (* a::[b,c] = [a,b,c] add item to the beginning of a list *)
-    if x = x' then (x, y)::l
-    else (x', y')::update x y l
-  | _ -> raise Lookup_failure;;
-  (* env' = update q (x::env_q) env *)
 
 type resultOrError =
     Result of tenv
@@ -31,8 +22,8 @@ let check_func f args funs =
     | Some((n_args, data_fun)) ->
       if List.length args <> n_args then
       ["Wrong number of parameters in " ^ f] (* Types.show_term (Func(f,args)) instead of f *)
-      else [] @
-      if not data_fun then [f ^ " is not a data function"] else []
+      else [](* only for patterns:  @
+      if not data_fun then [f ^ " is not a data function"] else []*)
 
 (* Checks if term: exists, check_func, return list of errors *)
 let rec check_term (env: ident list) (funs: (ident * (int * bool)) list) : term -> string list = function
