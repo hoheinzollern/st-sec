@@ -25,14 +25,16 @@ let rec print_errors = function
 
 let parse_and_print lexbuf =
   match parse_with_error lexbuf with
-  | Some { principals = p; protocol = g; functions = f } ->
-     (* let errors = Typecheck.check g ["Alice", []; "TPM", []] [] ["enc", (2, false); "dec", (2, false)] in *)
+  | Some { name = name; principals = p; protocol = g; functions = f; equations = eq } ->
+    let f = ("fst", (1, false))::("snd", (1, false))::f in
     let env = List.map (fun x -> x, []) p in
     let errors = Typecheck.check g env [] f in
-    let rules = tr g "NS" 0 ["Alice", Rule([], [], [], []); "Bob", Rule([], [], [], [])] ["Alice", []; "Bob", []] in
+    let r = List.map (fun p -> p, Types.Rule([], [], [], [])) p in
+    let e = List.map (fun p -> p, []) p in
+    let rules = tr g name 0 r e [] in
     print_errors errors;
-    printf "%s\n" (Types.show_global_type g);
-    printf "%s\n" (Types.show_rules rules)
+    (* printf "%s\n" (Types.show_global_type g); *)
+    printf "theory %s\nbegin\nfunctions: %s\nequations: %s\n\n%s\nend\n" name (Types.show_fdefs f) (Types.show_eqdefs eq) (Types.show_rules 1 rules)
   | None -> ()
 
 let loop filename () =

@@ -3,7 +3,7 @@
 %}
 %token <string> ID
 %token <int> NUM
-%token COMMA COLON SEMI
+%token COMMA COLON SEMI PCT
 %token LEFT_PAR RIGHT_PAR LEFT_ANGLE RIGHT_ANGLE LEFT_BRACE RIGHT_BRACE
 %token EQ AND OR NOT DIV
 %token NEW LET IN END MATCH WITH DATA PROBLEM PRINCIPALS FUNCTIONS EQUATIONS PROTOCOL
@@ -52,9 +52,10 @@ term_list:
   { l };
 
 pattern:
+| LEFT_PAR; p = pattern; RIGHT_PAR {p}
 | name = ID
   { PVar(name) }
-| EQ; t = term
+| PCT; t = term
   { PMatch(t) }
 | name = ID; LEFT_PAR; pargs = pattern_list; RIGHT_PAR
   { PFunc(name, pargs) }

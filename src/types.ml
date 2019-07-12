@@ -163,13 +163,25 @@ let rec show_facts = function
 let show_rule (Rule(letb, l, e, r)) =
   let rec show_letb = function
       [] -> ""
+    | [LetB(pat, t)] -> show_term (pattern_to_term pat) ^" = "^ show_term t
     | LetB(pat, t)::letb' -> show_term (pattern_to_term pat) ^" = "^ show_term t ^"\n"^show_letb letb' in
   (if letb = [] then "" else "let " ^ show_letb letb ^ " in\n")^" [" ^ show_facts l ^"] --["^ show_facts e^"]-> ["^ show_facts r^"]\n"
 
-let rec show_rules = function
+let rec show_rules n = function
     [] -> ""
-  | [r] -> show_rule r
-  | r::rs -> show_rule r ^"\n\n"^show_rules rs
+  | [r] -> "rule R"^string_of_int n^":\n"^show_rule r
+  | r::rs -> "rule R"^string_of_int n^":\n"^show_rule r ^"\n\n"^show_rules (n+1) rs
+
+
+let rec show_fdefs = function
+    [] -> ""
+  | [f, (n, _)] -> f ^ "/" ^ string_of_int n
+  | (f, (n, _))::fs -> f ^ "/" ^ string_of_int n ^", "^show_fdefs fs
+
+let rec show_eqdefs = function
+    [] -> ""
+  | [(t1, t2)] -> show_term t1 ^ " = " ^ show_term t2
+  | (t1, t2)::ts -> show_term t1 ^ " = " ^ show_term t2 ^ ", " ^ show_eqdefs ts
 
 exception Lookup_failure
 

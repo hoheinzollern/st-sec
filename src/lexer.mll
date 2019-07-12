@@ -39,6 +39,7 @@ rule read =
   | ':'      { COLON }
   | ';'      { SEMI }
   | '@'      { AT }
+  | '%'      { PCT }
   | "new"    { NEW }
   | "let"    { LET }
   | "in"     { IN }

@@ -79,10 +79,10 @@ end
 | Branch(p, q, {authentic = a; secret = s}, t, args) ->
 begin
   match List.assoc_opt p env with
-  | None -> ["Princepal " ^ p ^ " not defined", g]
+  | None -> ["Principal " ^ p ^ " not defined", g]
   | Some(env_p) ->
     List.map (fun e -> (e, g)) (check_term env_p funs t) @
-    match List.assq_opt q env with
+    match List.assoc_opt q env with
     | None -> ["Principal " ^ q ^ " not defined", g]
     | Some(env_q) ->
       List.concat (List.map (
