@@ -53,6 +53,7 @@ let rec tr g f n r e df =
      List.map (function
            p, Rule(b, l, e, r) ->
            let p_args = pa |> List.filter (fun ((_, p'), _) -> p = p') |> List.map (fun ((_, _), t) -> t) in
-           Rule(b, l, e, Fact(f'^"_"^p^"_"^string_of_int 0, p_args)::r)
+           let p_env = [] in
+           Rule(b, l, e, Fact(f'^"_"^p^"_"^string_of_int 0, p_args @ p_env)::r)
        ) r
   | GlobalEnd -> List.map (fun (p, rule) -> rule) r

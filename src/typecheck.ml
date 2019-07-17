@@ -16,21 +16,21 @@ let rec add_params_to_env env = function
     end
 
 (* Checks if function: exist, right number of args, if data func, return list of errors *)
-let check_func f args funs =
+let check_func f args is_pattern funs =
   match List.assoc_opt f funs with
     | None -> [f ^ " not defined"]
     | Some((n_args, data_fun)) ->
       if List.length args <> n_args then
       ["Wrong number of parameters in " ^ f] (* Types.show_term (Func(f,args)) instead of f *)
-      else [](* only for patterns:  @
-      if not data_fun then [f ^ " is not a data function"] else []*)
+      else [] @
+      if is_pattern && not data_fun then [f ^ " is not a data function"] else []
 
 (* Checks if term: exists, check_func, return list of errors *)
 let rec check_term (env: ident list) (funs: (ident * (int * bool)) list) : term -> string list = function
   | Var(x) -> if List.mem x env then [] (* List.mem x -> if x exists = true *)
               else [x ^ " not defined"]
   | Func(f, args) ->
-    check_func f args funs @
+    check_func f args false funs @
     List.concat (List.map (check_term env funs) args)
   | Tuple(l) ->
       List.concat(List.map (check_term env funs) l) (* recursively checks terms with their env and funcs, concat = flattens map *)
@@ -46,8 +46,8 @@ let rec check_pattern env funs = function
   | PMatch(t) ->
       check_term env funs t
   | PFunc(f, args) ->
-    check_func f args funs @
-    List.concat (List.map (check_pattern env funs) args)
+    check_func f args true funs @
+      List.concat (List.map (check_pattern env funs) args)
   | PTuple(l) ->
       List.concat(List.map (check_pattern env funs) l)
 

@@ -5,8 +5,8 @@ Equations: adec(aenc(x,pk(y)),y) = x;
 
 Protocol:
 
-Alice { new A; }
-Bob { new B; }
+let Proto(A @ Alice, B @ Bob) =
+
 Bob -> Alice: pkB = pk(B)
 Alice { new nA; }
 Alice -> Bob: x = aenc(<pk(A), nA>, pkB)
@@ -16,3 +16,9 @@ Alice { let (%nA) = fst(adec(y, A)); let nB = snd(adec(y, A)); }
 Alice -> Bob: z = aenc(nB, pkB)
 Bob { let (%nB) = adec(z, B); }
 end
+
+in
+
+Alice { new A; }
+Bob { new B; }
+Proto(A, B)
