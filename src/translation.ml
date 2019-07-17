@@ -48,5 +48,11 @@ let rec tr g f n r e df =
      let df' = (f', params)::df in
      tr g1 f' 1 r' e' df' @ tr g2 f n r e df'
   | CallGlobal(f', args) ->
-     []
+     let params = List.assoc f' df in
+     let pa = List.combine params args in
+     List.map (function
+           p, Rule(b, l, e, r) ->
+           let p_args = pa |> List.filter (fun ((_, p'), _) -> p = p') |> List.map (fun ((_, _), t) -> t) in
+           Rule(b, l, e, Fact(f'^"_"^p^"_"^string_of_int 0, p_args)::r)
+       ) r
   | GlobalEnd -> List.map (fun (p, rule) -> rule) r
