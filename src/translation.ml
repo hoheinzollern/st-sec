@@ -2,26 +2,39 @@ open Types
 
 let rec tr g f n r e df =
   match g with
-  | Send(p, q, _, x, t, g') ->
+  | Send(p, q, {authentic=a; secret=s}, x, t, g') ->
      let Rule(b1, l1, e1, r1) = List.assoc p r in
      let Rule(b2, l2, e2, r2) = List.assoc q r in
      let env_p = List.assoc p e in
+     let (in_f, out_f, extra) = match a, s with
+      | false, false -> Fact("In", [Var x]), [Fact("Out", [t])], []
+      | false, true -> Fact("Msg_"^f^"_"^string_of_int n, [Var x]), [Fact("Msg_"^f^"_"^string_of_int n, [t])], [Rule([], [Fact("In", [Var "x"])], [], [Fact("Msg_"^f^"_"^string_of_int n, [Var "x"])])]
+      | true, false -> Fact("Msg_"^f^"_"^string_of_int n, [Var x]), [Fact("Msg_"^f^"_"^string_of_int n, [t]); Fact("Out", [t])], []
+      | true, true -> Fact("Msg_"^f^"_"^string_of_int n, [Var x]), [Fact("Msg_"^f^"_"^string_of_int n, [t])], [] in
      let r' = update p (Rule([], [Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)], [], []))
-                (update q (Rule(b2, Fact("In", [Var x])::l2, e2, r2)) r) in
+                (update q (Rule(b2, in_f::l2, e2, r2)) r) in
      let e' = update q (x::List.assoc q e) e in
-     Rule(b1, l1, e1, Fact("Out", [t])::Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)::r1) :: tr g' f (n+1) r' e' df
-  | Branch(p, q, _, t, gs) ->
+     Rule(b1, l1, e1, out_f@Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)::r1) :: extra @ tr g' f (n+1) r' e' df
+  | Branch(p, q, {authentic=a; secret=s}, t, gs) ->
      let Rule(b1, l1, e1, r1) = List.assoc p r in
      let env_p = List.assoc p e in
      let r' = update p (Rule([], [Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)], [], [])) r in
+     let (out_f, extra) = match a, s with
+      | false, false -> [Fact("Out", [t])], []
+      | false, true -> [Fact("Msg_"^f^"_"^string_of_int n, [t])], [Rule([], [Fact("In", [Var "x"])], [], [Fact("Msg_"^f^"_"^string_of_int n, [Var "x"])])]
+      | true, false -> [Fact("Msg_"^f^"_"^string_of_int n, [t]); Fact("Out", [t])], []
+      | true, true -> [Fact("Msg_"^f^"_"^string_of_int n, [t])], [] in
      let rec tr_branch = function
        | [] -> []
        | (pat, g')::gs' ->
+          let in_f = match a, s with
+          | false, false -> Fact("In", [pattern_to_term pat])
+          | _, _ -> Fact("Msg_"^f^"_"^string_of_int n, [pattern_to_term pat]) in
           let Rule(b2, l2, e2, r2) = List.assoc q r in
-          let r'' = update q (Rule(b1, Fact("In", [pattern_to_term pat])::l2, e2, r2)) r' in
+          let r'' = update q (Rule(b1, in_f::l2, e2, r2)) r' in
           let e' = update q (binds pat@List.assoc q e) e in
           tr g' f (n+1) r'' e' df @ tr_branch gs' in
-     Rule(b1, l1, e1, Fact("Out", [t])::Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)::r1) :: tr_branch gs
+     Rule(b1, l1, e1, out_f @ Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)::r1) :: extra @ tr_branch gs
   | Compute(p, New(x, letb), g') ->
      let Rule(b1, l1, e1, r1) = List.assoc p r in
      let r' = update p (Rule(b1, Fact("Fr", [Var x])::l1, e1, r1)) r in
