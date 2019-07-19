@@ -1,0 +1,65 @@
+theory NS
+begin
+functions: fst/1, snd/1, aenc/2, adec/2, pk/1, m1/0, m2/0, m3/0
+equations: adec(aenc(x, pk(y)), y) = x
+
+rule R1:
+ [Proto_Bob_0(~B)] --[]-> [Out(pk(~B)), Proto_Bob_1(~B)]
+
+ rule R2:
+ let pkB = pk(B) in
+  [Fr(~nA), In(pkB), Proto_Alice_0(~A)] --[Out_R2(aenc(<m1(), pk(~A), ~nA>, pkB))]-> [Out(aenc(<m1(), pk(~A), ~nA>, pkB)), Proto_Alice_2(~nA, pkB, ~A)]
+
+
+ rule R3:
+ let nA = snd(snd(adec(x, ~B)))
+ pkA = fst(snd(adec(x, ~B)))
+ x = aenc(<m1(), pkA, nA>, pk(~B)) in
+  [Fr(~nB), In(x), Proto_Bob_1(~B)] --[In_R3(nA, x), Out_R3(aenc(<m2(), nA, ~nB, pk(~B)>, pkA))]-> [Out(aenc(<m2(), nA, ~nB, pk(~B)>, pkA)), Proto_Bob_3(nA, pkA, ~nB, x, ~B)]
+
+
+ rule R4:
+ let pkB = snd(snd(snd(adec(y, A))))
+ nB = fst(snd(snd(adec(y, A))))
+ nA = fst(snd(adec(y, A)))
+ y = aenc(<m2(), nA, nB, pk(B)>, pkA) in
+  [In(y), Proto_Alice_2(nA, pkB, A)] --[In_R4(nB, y)]-> [Out(aenc(<m3(), nB>, pkB)), Proto_Alice_4(nB, y, nA, pkB, A)]
+
+
+  rule R5:
+   [Proto_Alice_4(nB, y, nA, pkB, A)] --[]-> []
+
+
+  rule R6:
+  let nB = adec(z, B)
+  z = aenc(<m3(), nB>, pkB) in
+   [In(z), Proto_Bob_3(nA, pkA, nB, x, B)] --[]-> []
+
+
+rule R7:
+ [Fr(~A)] --[]-> [Proto_Alice_0(~A)]
+
+
+rule R8:
+ [Fr(~B)] --[]-> [Proto_Bob_0(~B)]
+
+
+
+ lemma types [sources]:
+   " (All ni mi #i.
+        In_R3( ni, mi ) @ i
+        ==>
+        ( (Ex #j. KU(ni) @ j & j < i)
+        | (Ex #j. Out_R2( mi ) @ j)
+        )
+     )
+   & (All nr mr #i.
+        In_R4( nr, mr) @ i
+        ==>
+        ( (Ex #j. KU(nr) @ j & j < i)
+        | (Ex #j. Out_R3( mr ) @ j)
+        )
+     )
+   "
+
+end

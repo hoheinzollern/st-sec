@@ -12,7 +12,7 @@ let rec tr g f n r e df =
       | true, false -> Fact("Msg_"^f^"_"^string_of_int n, [Var x]), [Fact("Msg_"^f^"_"^string_of_int n, [t]); Fact("Out", [t])], []
       | true, true -> Fact("Msg_"^f^"_"^string_of_int n, [Var x]), [Fact("Msg_"^f^"_"^string_of_int n, [t])], [] in
      let r' = update p (Rule([], [Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)], [], []))
-                (update q (Rule(b2, in_f::l2, e2, r2)) r) in
+                (update q (Rule((LetB(PVar x, t))::b2, in_f::l2, e2, r2)) r) in
      let e' = update q (x::List.assoc q e) e in
      Rule(b1, l1, e1, out_f@Fact(f^"_"^p^"_"^string_of_int n, id_to_var env_p)::r1) :: extra @ tr g' f (n+1) r' e' df
   | Branch(p, q, {authentic=a; secret=s}, t, gs) ->
