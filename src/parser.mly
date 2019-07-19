@@ -6,7 +6,7 @@
 %token COMMA COLON SEMI PCT
 %token LEFT_PAR RIGHT_PAR LEFT_ANGLE RIGHT_ANGLE LEFT_BRACE RIGHT_BRACE
 %token EQ AND OR NOT DIV
-%token NEW LET IN END MATCH WITH DATA PROBLEM PRINCIPALS FUNCTIONS EQUATIONS PROTOCOL
+%token NEW LET EVENT IN END MATCH WITH DATA PROBLEM PRINCIPALS FUNCTIONS EQUATIONS PROTOCOL
 %token AT ARROW AUTH CONF AUTHCONF
 %token EOF
 
@@ -71,6 +71,8 @@ let_bind:
   { New(name, letb) }
 | LET; p = pattern; EQ; t = term; SEMI; letb = let_bind
   { Let(p, t, letb) }
+| EVENT; name = ID; LEFT_PAR; ts = term_list; RIGHT_PAR; SEMI; letb = let_bind
+  { Event(name, ts, letb) }
 | { LetEnd };
 
 channel_options:

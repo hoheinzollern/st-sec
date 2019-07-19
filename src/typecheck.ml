@@ -105,6 +105,9 @@ begin
         List.map (fun e -> (e, g)) (check_pattern env_p funs pat) @
         let env_p' = binds pat @ env_p in
         let_bind env_p' (update p env_p' env) lb
+      | Event(name, ts, lb) ->
+        List.map (fun e -> (e, g)) (List.concat (List.map (check_term env_p funs) ts)) @
+        let_bind env_p env lb
       | LetEnd -> check g' env def funs
     in let_bind env_p env lb
 end

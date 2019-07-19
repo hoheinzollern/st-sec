@@ -42,6 +42,7 @@ rule read =
   | '%'      { PCT }
   | "new"    { NEW }
   | "let"    { LET }
+  | "event"  { EVENT }
   | "in"     { IN }
   | "end"    { END }
   | "match"  { MATCH }
